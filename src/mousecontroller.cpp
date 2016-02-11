@@ -19,6 +19,6 @@ void CMouseController::Update() {
 }
 
 void CMouseController::SendEvent(uint32 id) {
-	CEvent ev(EEC_MOUSE, id, m_mouseX, m_mouseY);
+	CEvent * ev = new CEvent(EEC_MOUSE, id, m_mouseX, m_mouseY);
 	IInputManagerController::ManageEvent(ev);
 }

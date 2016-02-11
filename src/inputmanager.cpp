@@ -21,7 +21,7 @@ void CInputManager::Register(IRegistrable *obj, EEventController controller, uin
 	}
 
 	if (!alreadyIn)
-		m_observers.Add(new Storable(controller, obj, func));
+		m_observers.Add(new Storable(obj, controller, eventId/*, func*/));
 }
 
 /* returns false if obj was not in the list */
@@ -41,8 +41,8 @@ void CInputManager::Update() {
 
 }
 
-void CInputManager::ManageEvent(CEvent ev) {
-	switch (ev.GetController()) {
+void CInputManager::ManageEvent(CEvent * ev) {
+	switch (ev->GetController()) {
 	case EEC_MOUSE:
 		ManageMouse(ev);
 		break;
@@ -54,24 +54,31 @@ void CInputManager::ManageEvent(CEvent ev) {
 	}
 }
 
-void CInputManager::ManageMouse(CEvent ev) {
-	switch (ev.GetId()) {
-	case 0:
-		//LMB press
-	case 1:
-		//LMB release
+void CInputManager::ManageMouse(CEvent * ev) {
+	for (uint32 i = 0; i < m_observers.Size(); i++) {
+		if (ev->GetController() == m_observers[i]->m_controller
+				&& ev->GetId() == m_observers[i]->m_id) {
+			m_observers[i]->m_observer->Notify(ev);
+		}
 	}
+	//switch (ev.GetId()) {
+	//case 0:
+	//	//LMB press
+	//case 1:
+	//	//LMB release
+	//}
 }
 
-void CInputManager::ManageKeyboard(CEvent ev) {
+void CInputManager::ManageKeyboard(CEvent * ev) {
 
 }
 
-CInputManager::Storable::Storable(EEventController e, IRegistrable *ob,
-		void(IRegistrable::*func)()) {
-	m_controller = e;
+CInputManager::Storable::Storable(IRegistrable *ob, EEventController e, uint32 id/*,
+		void(IRegistrable::*func)()*/) {
 	m_observer = ob;
-	m_action = func;
+	m_controller = e;
+	m_id = id;
+	//m_action = func;
 }
 
 CInputManager::~CInputManager() {

@@ -7,11 +7,17 @@
 
 #include "../interfaces/registrable.h"
 
+class Sprite;
+class String;
+
 class CEntity: public IRegistrable {
 public:
-	
+	CEntity(String &filename);
+
+	virtual void Notify(CEvent * ev);
 private:
 	
+	Sprite * m_sprite;
 };
 
 #endif //!_C_ENTITY_H

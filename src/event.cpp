@@ -6,3 +6,7 @@ CEvent::CEvent(EEventController controller, uint32 id, double x = 0, double y = 
 	m_x = x;
 	m_y = y;
 }
+
+CEvent::~CEvent() {
+
+}
