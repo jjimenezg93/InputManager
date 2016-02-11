@@ -9,7 +9,7 @@
 
 class CEntity: public IRegistrable {
 public:
-	virtual void OnEvent();
+	
 private:
 	
 };

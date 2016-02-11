@@ -1,38 +1,77 @@
 #include "../include/headers/inputmanager.h"
 #include "../include/interfaces/registrable.h"
 
+CInputManager * CInputManager::inputmanager = nullptr;
+
 CInputManager &CInputManager::Instance() {
-	if (!m_instance)
-		m_instance = new CInputManager();
-	return *m_instance;
+	if (!inputmanager)
+		inputmanager = new CInputManager();
+	return *inputmanager;
 }
 
-CInputManager::Storable::Storable(EEventController e, IRegistrable *ob, void(IRegistrable::*func)()) {
-	m_eventType = e;
-	m_observer = ob;
-	m_action = func;
-}
-
-void CInputManager::Register(IRegistrable *obj, EEventController eventType, void(IRegistrable::*func)()) {
+void CInputManager::Register(IRegistrable *obj, EEventController controller, uint32 eventId,
+		void(IRegistrable::*func)()) {
 	uint32 i = 0;
 	bool alreadyIn = false;
-	while (i < m_observers.Size()) {		//inefficient
-		if (m_observers[i]->m_observer == obj && m_observers[i]->m_eventType == eventType) {
+	while (i < m_observers.Size()) {		//inefficient -> sort array (binary search)
+		if (m_observers[i]->m_observer == obj && m_observers[i]->m_controller == controller) {
 			alreadyIn = true;
 		}
 		i++;
 	}
 
 	if (!alreadyIn)
-		m_observers.Add(new Storable(eventType, obj, func));
+		m_observers.Add(new Storable(controller, obj, func));
 }
 
-void CInputManager::Unregister(IRegistrable *obj, EEventController eventType) {
-	for (uint32 i = 0; i < m_observers.Size(); i++) {		//inefficient -> sort array (binary search)
-		if (m_observers[i]->m_observer == obj && m_observers[i]->m_eventType == eventType) {
+/* returns false if obj was not in the list */
+bool CInputManager::Unregister(IRegistrable *obj, EEventController controller, uint32 eventId) {
+	uint32 i = 0;
+	while (i < m_observers.Size()) { //inefficient -> sort array (binary search)
+		if (m_observers[i]->m_observer == obj && m_observers[i]->m_controller == controller) {    
 			m_observers.RemoveAt(i);
+			return true;
 		}
+		i++;
 	}
+	return false;
+}
+
+void CInputManager::Update() {
+
+}
+
+void CInputManager::ManageEvent(CEvent ev) {
+	switch (ev.GetController()) {
+	case EEC_MOUSE:
+		ManageMouse(ev);
+		break;
+	case EEC_KEYBOARD:
+		ManageKeyboard(ev);
+		break;
+	default:
+		break;
+	}
+}
+
+void CInputManager::ManageMouse(CEvent ev) {
+	switch (ev.GetId()) {
+	case 0:
+		//LMB press
+	case 1:
+		//LMB release
+	}
+}
+
+void CInputManager::ManageKeyboard(CEvent ev) {
+
+}
+
+CInputManager::Storable::Storable(EEventController e, IRegistrable *ob,
+		void(IRegistrable::*func)()) {
+	m_controller = e;
+	m_observer = ob;
+	m_action = func;
 }
 
 CInputManager::~CInputManager() {

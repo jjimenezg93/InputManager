@@ -1,0 +1,4 @@
+EEC_MOUSE
+-----
+0 = LMB press
+1 = LMB release

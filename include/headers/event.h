@@ -9,10 +9,17 @@ enum EEventController { EEC_MOUSE, EEC_KEYBOARD, EEC_PAD };
 
 class CEvent {
 public:
-	CEvent(uint32 id, EEventController controller);
+	CEvent(EEventController controller, uint32 id, double x = 0, double y = 0);
+
+	EEventController GetController() { return m_controller; }
+	uint32 GetId() { return m_id; }
+	
+	double GetX() { return m_x; }
+	double GetY() { return m_y; }
 private:
-	uint32 m_id;
 	EEventController m_controller;
+	uint32 m_id;
+	double m_x, m_y;
 };
 
 #endif //!_C_EVENT_H

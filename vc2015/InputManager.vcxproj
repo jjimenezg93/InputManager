@@ -146,13 +146,20 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\src\entity.cpp" />
     <ClCompile Include="..\src\event.cpp" />
     <ClCompile Include="..\src\inputmanager.cpp" />
+    <ClCompile Include="..\src\mousecontroller.cpp" />
+    <ClCompile Include="..\src\nsinputmanagercontroller.cpp" />
+    <ClCompile Include="..\src\nsinputmanagerentity.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\include\headers\entity.h" />
     <ClInclude Include="..\include\headers\event.h" />
     <ClInclude Include="..\include\headers\inputmanager.h" />
+    <ClInclude Include="..\include\headers\mousecontroller.h" />
+    <ClInclude Include="..\include\interfaces\nsinputmanagercontroller.h" />
+    <ClInclude Include="..\include\interfaces\nsinputmanagerentity.h" />
     <ClInclude Include="..\include\interfaces\registrable.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
