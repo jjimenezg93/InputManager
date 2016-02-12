@@ -1,9 +1,7 @@
 #ifndef _C_MOUSE_CONTROLLER_H
 #define _C_MOUSE_CONTROLLER_H
 
-#ifndef UGINE_TYPES_H
-#include "../../ugine/include/types.h"
-#endif
+#include "types.h"
 
 class CMouseController {
 public:
@@ -15,7 +13,8 @@ private:
 
 	int32 m_mouseX;
 	int32 m_mouseY;
-	uint8 buttons;
+	bool m_leftBPressed;
+	bool m_rightBPressed;
 };
 
 #endif //!_C_MOUSE_CONTROLLER_H

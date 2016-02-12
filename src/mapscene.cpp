@@ -1,3 +1,4 @@
+#pragma warning(push, 0)
 #include "../include/map.h"
 #include "../include/mapscene.h"
 #include "../include/parallaxscene.h"
@@ -13,3 +14,4 @@ void MapScene::Update(double elapsed) {
 void MapScene::RenderAfterBackground() const{
 	m_map->Render();
 }
+#pragma warning(pop)

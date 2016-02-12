@@ -1,3 +1,4 @@
+#pragma warning(push, 0)
 #include "../include/glyph.h"
 
 Glyph::Glyph(double ox, double oy, double ex, double ey) {
@@ -6,3 +7,4 @@ Glyph::Glyph(double ox, double oy, double ex, double ey) {
 	m_endX = ex;
 	m_endY = ey;
 }
+#pragma warning(pop)

@@ -1,3 +1,4 @@
+#pragma warning(push, 0)
 #include "../include/skeletonsprite.h"
 #include "../include/bone.h"
 #include "../include/bonedata.h"
@@ -71,3 +72,4 @@ void SkeletonSprite::Render() const {
 	this->root->Render();
 	Renderer::Instance().PopMatrix();
 }
+#pragma warning(pop)

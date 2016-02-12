@@ -1,3 +1,4 @@
+#pragma warning(push, 0)
 #ifndef UGINE_SPRITE_H
 #define UGINE_SPRITE_H
 
@@ -116,3 +117,4 @@ private:
 };
 
 #endif
+#pragma warning(pop)

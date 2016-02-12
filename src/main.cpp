@@ -1,14 +1,29 @@
-#include "../include/headers/inputmanager.h"
-#include "../include/headers/entity.h"
+#pragma comment(linker, "/SUBSYSTEM:windows /ENTRY:mainCRTStartup")
+#include "../include/entity.h"
+#include "../include/inputmanager.h"
+#include "../include/mousecontroller.h"
 
-#include "../ugine/include/u-gine.h"
+#include "../include/u-gine.h"
 
 int main() {
 	Screen::Instance().Open(800, 600, false);
-	CEntity * entity = new CEntity(String("data/alien.png"));
+	Image * alienImg = ResourceManager::Instance().LoadImage("data/alien.png");
+	alienImg->SetMidHandle();
+	CEntity * entity = new CEntity(alienImg);
+	CMouseController mouseController;
+
+	entity->Register(EEC_MOUSE, 0);
 
 	while (Screen::Instance().IsOpened() && !Screen::Instance().KeyPressed(GLFW_KEY_ESC)) {
 		Renderer::Instance().Clear();
+
+		mouseController.Update();
+		//keyboardController->Update();
+
+		CInputManager::Instance().ManageEvents();
+
+		entity->GetSprite()->Update(Screen::Instance().ElapsedTime());
+		entity->GetSprite()->Render();
 
 		Screen::Instance().Refresh();
 	}

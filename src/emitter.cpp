@@ -1,3 +1,4 @@
+#pragma warning(push, 0)
 #include <ctime>
 
 #include "../include/affector.h"
@@ -77,3 +78,4 @@ void Emitter::Render() const {
 		m_particles[i].Render();
 	}
 }
+#pragma warning(pop)

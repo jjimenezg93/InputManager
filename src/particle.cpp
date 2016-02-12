@@ -1,3 +1,4 @@
+#pragma warning(push, 0)
 #include "../include/particle.h"
 
 Particle::Particle(): Sprite(nullptr) {
@@ -29,3 +30,4 @@ void Particle::Update(double elapsed) {
 	}
 	m_lifetime -= elapsed;
 }
+#pragma warning(pop)

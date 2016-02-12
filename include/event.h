@@ -1,16 +1,13 @@
 #ifndef _C_EVENT_H
 #define _C_EVENT_H
 
-#ifndef UGINE_TYPES_H
-#include "../../ugine/include/types.h"
-#endif
+#include "types.h"
 
 enum EEventController { EEC_MOUSE, EEC_KEYBOARD, EEC_PAD };
 
 class CEvent {
 public:
 	CEvent(EEventController controller, uint32 id, double x = 0, double y = 0);
-	~CEvent(); //memory deallocated by the entity who "consumes" the event
 
 	EEventController GetController() { return m_controller; }
 	uint32 GetId() { return m_id; }

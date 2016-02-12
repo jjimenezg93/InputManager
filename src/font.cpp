@@ -1,3 +1,4 @@
+#pragma warning(push, 0)
 #include "..\include\font.h"
 #include "..\include\renderer.h"
 #include "..\include\resourcemanager.h"
@@ -112,3 +113,4 @@ void Font::Render(const String & text, double x, double y) const{
 		str++;
 	}
 }
+#pragma warning(pop)

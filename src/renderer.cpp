@@ -1,3 +1,4 @@
+#pragma warning(push, 0)
 #include "../include/renderer.h"
 #include "../include/font.h"
 #include "../include/glinclude.h"
@@ -188,3 +189,4 @@ void Renderer::RotateMatrix(double rotation, double x, double y, double z) const
 void Renderer::ScaleMatrix(double x, double y, double z) const {
 	glScaled(x, y, z);
 }
+#pragma warning(pop)

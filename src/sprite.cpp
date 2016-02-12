@@ -1,3 +1,4 @@
+#pragma warning(push, 0)
 #include "../include/sprite.h"
 #include "../include/rectcollision.h"
 #include "../include/image.h"
@@ -109,10 +110,9 @@ bool Sprite::CheckCollision(const Map* map) {
 		if (map->CheckCollision(m_collision)) {
 			m_collided = true;
 			return true;
-		} else {
-			return false;
 		}
 	}
+	return false;
 }
 
 void Sprite::RotateTo(int32 angle, double speed) {
@@ -243,3 +243,4 @@ void Sprite::UpdateCollisionBox(double x, double y, double w, double h) {
 	m_centerx = x + (w / 2);
 	m_centery = y + (h / 2);
 }
+#pragma warning(pop)

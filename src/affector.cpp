@@ -1,3 +1,4 @@
+#pragma warning(push, 0)
 #include "../include/affector.h"
 #include "../include/particle.h"
 
@@ -27,3 +28,4 @@ void Affector::ChangeParticleProperties(Particle &particle) const {
 	particle.SetAngularVelocity(genRandomF(m_minangvel, m_maxangvel));
 	particle.SetAffected(true);
 }
+#pragma warning(pop)

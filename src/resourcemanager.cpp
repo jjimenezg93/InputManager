@@ -1,3 +1,4 @@
+#pragma warning(push, 0)
 #include "../include/resourcemanager.h"
 #include "../include/collisionpixeldata.h"
 #include "../include/font.h"
@@ -142,3 +143,4 @@ void ResourceManager::FreeResources() {
 	FreeMaps();
 	//FreeIsometricMaps();
 }
+#pragma warning(pop)

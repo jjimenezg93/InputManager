@@ -1,3 +1,4 @@
+#pragma warning(push, 0)
 #include "../include/map.h"
 #include "../include/rectcollision.h"
 #include "../include/collision.h"
@@ -109,3 +110,4 @@ double Map::GetGroundY(double x, double y) const {
 	}
 	return groundY;
 }
+#pragma warning(pop)

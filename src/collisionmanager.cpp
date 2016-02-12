@@ -1,3 +1,4 @@
+#pragma warning(push, 0)
 #define _USE_MATH_DEFINES
 
 #include "../include/collisionmanager.h"
@@ -104,3 +105,4 @@ bool CollisionManager::RectToRect(double x1, double y1, double w1, double h1, do
 	else
 		return false;
 }
+#pragma warning(pop)

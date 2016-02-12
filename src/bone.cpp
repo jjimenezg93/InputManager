@@ -1,3 +1,4 @@
+#pragma warning(push, 0)
 #include "../include/bone.h"
 #include "../include/glinclude.h"
 #include "../include/image.h"
@@ -154,3 +155,4 @@ void Bone::GetFrame(int32 f, const Frame** frame, const Frame** prevFrame, const
 double Bone::Interpolate(int32 id, int32 prevId, int32 nextId, double prevVal, double nextVal) const {
 	return prevVal + (nextVal - prevVal) * static_cast<double>(id - prevId) / static_cast<double>(nextId - prevId);
 }
+#pragma warning(pop)

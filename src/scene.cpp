@@ -1,3 +1,4 @@
+#pragma warning(push, 0)
 #include "../include/scene.h"
 #include "../include/emitter.h"
 #include "../include/image.h"
@@ -82,3 +83,4 @@ void Scene::RenderSprites(Layer layer) const {
 void Scene::RenderEmitters(Layer layer) const {
     for ( uint32 i = 0; i < emitters[layer].Size(); i++ ) emitters[layer][i]->Render();
 }
+#pragma warning(pop)

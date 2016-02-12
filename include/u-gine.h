@@ -1,6 +1,7 @@
 #ifndef UGINE_MAIN_H
 #define UGINE_MAIN_H
 
+#pragma warning(push, 0)
 #include "affector.h"
 #include "array.h"
 #include "bone.h"
@@ -26,5 +27,6 @@
 #include "sprite.h"
 #include "string.h"
 #include "types.h"
+#pragma warning(pop)
 
 #endif

@@ -1,8 +1,8 @@
-#include "../include/headers/inputmanager.h"
-#include "../include/interfaces/nsinputmanagercontroller.h"
+#include "../include/inputmanager.h"
+#include "../include/nsinputmanagercontroller.h"
 
 namespace IInputManagerController {
-	void ManageEvent(CEvent * ev) {
-		CInputManager::Instance().ManageEvent(ev);
+	void AddEvent(CEvent * ev) {
+		CInputManager::Instance().AddEvent(ev);
 	}
 }

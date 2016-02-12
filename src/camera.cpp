@@ -1,3 +1,4 @@
+#pragma warning(push, 0)
 #include "..\include\camera.h"
 #include "..\include\screen.h"
 
@@ -73,3 +74,4 @@ void Camera::Update() {
 		}
 	}
 }
+#pragma warning(pop)

@@ -1,3 +1,4 @@
+#pragma warning(push, 0)
 #include "../include/image.h"
 #include "../include/glinclude.h"
 #include "../include/math.h"
@@ -84,3 +85,4 @@ Image::~Image() {
 void Image::Bind() const {
 	Renderer::Instance().BindImage(m_gltex);
 }
+#pragma warning(pop)

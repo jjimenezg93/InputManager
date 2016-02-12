@@ -1,3 +1,4 @@
+#pragma warning(push, 0)
 #include "../include/parallaxscene.h"
 #include "../include/screen.h"
 
@@ -28,3 +29,4 @@ void ParallaxScene::RenderBackground() const {
 		Renderer::Instance().DrawTiledImage(m_frontLayer, 0, 0, Screen::Instance().GetWidth(), Screen::Instance().GetHeight(),
 			(GetCamera().GetX() * m_relFrontSpeedX) - m_frontX, (GetCamera().GetY() * m_relFrontSpeedY) - m_frontY);
 }
+#pragma warning(pop)
