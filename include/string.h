@@ -11,6 +11,7 @@
 #define realpath(N,R) _fullpath((R),(N),_MAX_PATH)
 #endif
 
+#pragma warning(push, 0)
 class String {
 public:
     String(const char* str = "");
@@ -220,6 +221,7 @@ inline String String::Mid(int ofs, int n) {
     return str;
 }
 
+#pragma warning(disable: 4706)
 inline String String::Replace(const String& find, const String& rep) const {
     String str;
 
@@ -253,6 +255,7 @@ inline String String::Replace(const String& find, const String& rep) const {
 
     return str;
 }
+#pragma warning(default: 4706)
 
 inline int String::Find(const String& str, int ofs) const {
     const char* p = strstr(&buffer[ofs], str.buffer);
@@ -466,4 +469,5 @@ inline Array<String> String::Split(const String& delim) const {
     return arr;
 }
 
+#pragma warning(pop)
 #endif // UGINE_STRING_H

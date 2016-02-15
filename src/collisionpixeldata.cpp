@@ -16,8 +16,8 @@ CollisionPixelData::CollisionPixelData(const String & filename) {
 	uint8 * buffer = stbi_load(filename.ToCString(), &width32, &height32, ptrComp, 4);
 	uint8 * ptrBuffer = buffer;
 
-	m_width = width32;
-	m_height = height32;
+	m_width = static_cast<uint16>(width32);
+	m_height = static_cast<uint16>(height32);
 
 	uint32 numPixels = m_width * m_height;
 	bool * bufferBool = (bool *)malloc(numPixels);

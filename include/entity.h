@@ -26,6 +26,7 @@ public:
 private:
 	
 	Sprite * m_sprite;
+	bool m_mustMove;
 };
 
 #endif //!_C_ENTITY_H

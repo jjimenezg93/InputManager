@@ -137,15 +137,21 @@ void Sprite::RotateTo(int32 angle, double speed) {
 }
 
 void Sprite::MoveTo(double x, double y, double speed) {
-	if (x == round(m_x) && y == round(m_y) || speed == 0) {
+	if (round(x) == round(m_x) && round(y) == round(m_y) || speed == 0) {
 		m_moving = false;
 	} else {
 		m_toX = x;
 		m_toY = y;
 		m_moving = true;
 		double time = sqrt(pow(m_toX - m_x, 2) + pow(m_toY - m_y, 2)) / speed;
-		m_movingSpeedX = (m_toX - m_x) / time;
-		m_movingSpeedY = (m_toY - m_y) / time;
+		if (time == 0 && m_toX == 0)
+			m_movingSpeedX = 0;
+		else
+			m_movingSpeedX = (m_toX - m_x) / time;
+		if (time == 0 && m_toY == 0)
+			m_movingSpeedY = 0;
+		else
+			m_movingSpeedY = (m_toY - m_y) / time;
 	}
 }
 

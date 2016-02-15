@@ -15,7 +15,8 @@ void CInputManager::Register(IRegistrable *obj, EEventController controller, uin
 	uint32 i = 0;
 	bool alreadyIn = false;
 	while (i < m_observers.Size()) {		//inefficient -> sort array (binary search)
-		if (m_observers[i]->m_observer == obj && m_observers[i]->m_controller == controller) {
+		if (m_observers[i]->m_observer == obj && m_observers[i]->m_controller == controller
+				&& m_observers[i]->m_id == eventId) {
 			alreadyIn = true;
 		}
 		i++;
@@ -29,7 +30,8 @@ void CInputManager::Register(IRegistrable *obj, EEventController controller, uin
 bool CInputManager::Unregister(IRegistrable *obj, EEventController controller, uint32 eventId) {
 	uint32 i = 0;
 	while (i < m_observers.Size()) { //inefficient -> sort array (binary search)
-		if (m_observers[i]->m_observer == obj && m_observers[i]->m_controller == controller) {    
+		if (m_observers[i]->m_observer == obj && m_observers[i]->m_controller == controller
+				&& m_observers[i]->m_id == eventId) {    
 			m_observers.RemoveAt(i);
 			return true;
 		}
@@ -46,13 +48,14 @@ void CInputManager::ManageEvents() {
 	for (uint32 i = 0; i < m_events.Size(); i++) {
 		for (uint32 j = 0; j < m_observers.Size(); j++) {
 			if (m_events[i]->GetController() == m_observers[j]->m_controller
-					&& m_events[i]->GetId() == m_observers[j]->m_id) {
+				&& m_events[i]->GetId() == m_observers[j]->m_id) {
 				m_observers[j]->m_observer->Notify(m_events[i]);
-				//(m_observers[i].*m_action)(); //syntaxis to call member function from pointer 
 			}
 		}
-		delete m_events[i];
-		m_events.RemoveAt(i);
+	}
+	while (m_events.Size() > 0) {
+		delete m_events[0];
+		m_events.RemoveAt(0);
 	}
 }
 

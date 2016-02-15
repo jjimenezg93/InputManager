@@ -13,8 +13,6 @@ private:
 
 	int32 m_mouseX;
 	int32 m_mouseY;
-	bool m_leftBPressed;
-	bool m_rightBPressed;
 };
 
 #endif //!_C_MOUSE_CONTROLLER_H

@@ -11,10 +11,11 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{88864902-00CE-4236-B768-D7B8CA6A4D82}</ProjectGuid>
+    <ProjectGuid>{815F2ECA-AD33-4157-8F6E-7B1B524A27B6}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>ugine</RootNamespace>
     <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
+    <ProjectName>InputManager</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -50,7 +51,7 @@
     <ClCompile>
       <PrecompiledHeader>
       </PrecompiledHeader>
-      <WarningLevel>Level3</WarningLevel>
+      <WarningLevel>Level4</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_CRT_SECURE_NO_WARNINGS;_DEBUG;_CONSOLE;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
@@ -64,7 +65,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
-      <WarningLevel>Level3</WarningLevel>
+      <WarningLevel>Level4</WarningLevel>
       <PrecompiledHeader>
       </PrecompiledHeader>
       <Optimization>MaxSpeed</Optimization>
@@ -101,6 +102,7 @@
     <ClInclude Include="..\include\glyph.h" />
     <ClInclude Include="..\include\image.h" />
     <ClInclude Include="..\include\inputmanager.h" />
+    <ClInclude Include="..\include\keyboardcontroller.h" />
     <ClInclude Include="..\include\map.h" />
     <ClInclude Include="..\include\mapscene.h" />
     <ClInclude Include="..\include\math.h" />
@@ -137,6 +139,7 @@
     <ClCompile Include="..\src\glyph.cpp" />
     <ClCompile Include="..\src\image.cpp" />
     <ClCompile Include="..\src\inputmanager.cpp" />
+    <ClCompile Include="..\src\keyboardcontroller.cpp" />
     <ClCompile Include="..\src\main.cpp" />
     <ClCompile Include="..\src\map.cpp" />
     <ClCompile Include="..\src\mapscene.cpp" />
