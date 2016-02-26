@@ -3,11 +3,12 @@
 #include "../include/event.h"
 
 namespace IInputManagerEntity {
-	void Register(IRegistrable *obj, EEventController controller, uint32 id) {
+	void Register(IRegistrable * const obj, const EEventController controller, const uint32 id) {
 		CInputManager::Instance().Register(obj, controller, id);
 	}
 
-	bool Unregister(IRegistrable *obj, EEventController controller, uint32 id) {
+	bool Unregister(IRegistrable * const obj, const EEventController controller,
+			const uint32 id) {
 		return CInputManager::Instance().Unregister(obj, controller, id);
 	}
 }

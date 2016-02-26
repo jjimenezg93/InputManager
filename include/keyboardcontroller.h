@@ -6,10 +6,12 @@
 class CKeyboardController {
 public:
 	CKeyboardController();
+	uint8 Init();
 	~CKeyboardController();
+
 	void Update();
 private:
-	void SendEvent(uint32 id);
+	void SendEvent(const uint32 id);
 
 	int32 m_mouseX;
 	int32 m_mouseY;

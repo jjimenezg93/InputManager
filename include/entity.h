@@ -4,7 +4,7 @@
 #include "types.h"
 
 #include "event.h"
-#include "registrable.h"
+#include "iregistrable.h"
 
 class Sprite;
 class String;
@@ -12,17 +12,17 @@ class Image;
 
 class CEntity: public IRegistrable {
 public:
-	CEntity(String &filename);
-	CEntity(Image * img);
+	CEntity(const String &filename);
+	CEntity(Image * const img);
 
-	Sprite * GetSprite() { return m_sprite; }
+	Sprite * GetSprite() const { return m_sprite; }
 
-	virtual void Notify(CEvent * ev);
+	virtual void Notify(const CEvent * const ev);
 	
-	void ManageMouse(CEvent * ev);
-	void ManageKeyboard(CEvent * ev);
+	void ManageMouse(const CEvent * const ev);
+	void ManageKeyboard(const CEvent * const ev);
 
-	void Register(EEventController controller, uint32 id);
+	void Register(const EEventController controller, const uint32 id);
 private:
 	
 	Sprite * m_sprite;

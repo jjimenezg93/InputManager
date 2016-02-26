@@ -90,6 +90,7 @@
     <ClInclude Include="..\include\bonedata.h" />
     <ClInclude Include="..\include\camera.h" />
     <ClInclude Include="..\include\circlecollision.h" />
+    <ClInclude Include="..\include\clickgesture.h" />
     <ClInclude Include="..\include\collision.h" />
     <ClInclude Include="..\include\collisionmanager.h" />
     <ClInclude Include="..\include\collisionpixeldata.h" />
@@ -98,6 +99,7 @@
     <ClInclude Include="..\include\event.h" />
     <ClInclude Include="..\include\font.h" />
     <ClInclude Include="..\include\frame.h" />
+    <ClInclude Include="..\include\igesture.h" />
     <ClInclude Include="..\include\glinclude.h" />
     <ClInclude Include="..\include\glyph.h" />
     <ClInclude Include="..\include\image.h" />
@@ -113,7 +115,7 @@
     <ClInclude Include="..\include\particle.h" />
     <ClInclude Include="..\include\pixelcollision.h" />
     <ClInclude Include="..\include\rectcollision.h" />
-    <ClInclude Include="..\include\registrable.h" />
+    <ClInclude Include="..\include\iregistrable.h" />
     <ClInclude Include="..\include\renderer.h" />
     <ClInclude Include="..\include\resourcemanager.h" />
     <ClInclude Include="..\include\scene.h" />
@@ -130,6 +132,7 @@
     <ClCompile Include="..\src\affector.cpp" />
     <ClCompile Include="..\src\bone.cpp" />
     <ClCompile Include="..\src\camera.cpp" />
+    <ClCompile Include="..\src\clickgesture.cpp" />
     <ClCompile Include="..\src\collisionmanager.cpp" />
     <ClCompile Include="..\src\collisionpixeldata.cpp" />
     <ClCompile Include="..\src\emitter.cpp" />

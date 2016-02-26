@@ -6,11 +6,13 @@
 class CMouseController {
 public:
 	CMouseController();
+	uint8 Init();
 	~CMouseController();
+	
 	void Update();
 private:
-	void SendEvent(uint32 id);
-
+	void SendEvent(const uint32 id);
+	
 	int32 m_mouseX;
 	int32 m_mouseY;
 };

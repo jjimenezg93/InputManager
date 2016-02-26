@@ -3,17 +3,36 @@
 
 #include "types.h"
 
-enum EEventController { EEC_MOUSE, EEC_KEYBOARD, EEC_PAD };
+enum EEventController {
+	EEC_MOUSE,
+	EEC_KEYBOARD,
+	EEC_PAD,
+	EEC_NONE };
+
+enum EMouseEventID {
+	EME_LMB_PRESS,
+	EME_LMB_RELEASE,
+	EME_LMB_CLICK,
+	EME_RMB_PRESS,
+	EME_RMB_RELEASE,
+	EME_RMB_CLICK };
+
+enum EKeyboardEventID {
+	EKE_SPACE
+};
 
 class CEvent {
 public:
-	CEvent(EEventController controller, uint32 id, double x = 0, double y = 0);
+	CEvent(const EEventController controller, const uint32 id,
+			const double x = 0, const double y = 0);
 
-	EEventController GetController() { return m_controller; }
-	uint32 GetId() { return m_id; }
+	EEventController GetController() const { return m_controller; }
+	uint32 GetId() const { return m_id; }
+
+	void SetId(EMouseEventID newId) { m_id = newId; }
 	
-	double GetX() { return m_x; }
-	double GetY() { return m_y; }
+	double GetX() const { return m_x; }
+	double GetY() const { return m_y; }
 private:
 	EEventController m_controller;
 	uint32 m_id;

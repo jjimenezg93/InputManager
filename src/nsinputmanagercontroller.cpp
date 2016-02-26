@@ -2,7 +2,7 @@
 #include "../include/nsinputmanagercontroller.h"
 
 namespace IInputManagerController {
-	void AddEvent(CEvent * ev) {
+	void AddEvent(CEvent * const ev) {
 		CInputManager::Instance().AddEvent(ev);
 	}
 }

@@ -5,7 +5,14 @@
 #include "../lib/glfw.h"
 
 CMouseController::CMouseController() {
-	glfwInit();
+}
+
+uint8 CMouseController::Init() {
+	uint8 ret = 0;
+	if (!glfwInit()) {
+		ret = 1;
+	}
+	return ret;
 }
 
 CMouseController::~CMouseController() {
@@ -15,20 +22,20 @@ CMouseController::~CMouseController() {
 void CMouseController::Update() {
 	glfwGetMousePos(&m_mouseX, &m_mouseY);
 	if (glfwGetMouseButton(GLFW_MOUSE_BUTTON_LEFT) == GLFW_PRESS) {
-		SendEvent(0);
+		SendEvent(EME_LMB_PRESS);
 	}
 	if (glfwGetMouseButton(GLFW_MOUSE_BUTTON_LEFT) == GLFW_RELEASE) {
-		SendEvent(1);
+		SendEvent(EME_LMB_RELEASE);
 	}
 	if (glfwGetMouseButton(GLFW_MOUSE_BUTTON_RIGHT) == GLFW_PRESS) {
-		SendEvent(2);
+		SendEvent(EME_RMB_PRESS);
 	}
 	if (glfwGetMouseButton(GLFW_MOUSE_BUTTON_RIGHT) == GLFW_RELEASE) {
-		SendEvent(3);
+		SendEvent(EME_RMB_RELEASE);
 	}
 }
 
-void CMouseController::SendEvent(uint32 id) {
+void CMouseController::SendEvent(const uint32 id) {
 	CEvent * ev = new CEvent(EEC_MOUSE, id, m_mouseX, m_mouseY);
 	IInputManagerController::AddEvent(ev);
 }

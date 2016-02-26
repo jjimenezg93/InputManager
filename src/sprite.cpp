@@ -1,4 +1,3 @@
-#pragma warning(push, 0)
 #include "../include/sprite.h"
 #include "../include/rectcollision.h"
 #include "../include/image.h"
@@ -9,6 +8,7 @@
 #include "../include/circlecollision.h"
 #include "../include/screen.h"
 #include <math.h>
+#pragma warning(push, 0)
 
 Sprite::Sprite(Image* image) {
 	m_image = image;

@@ -1,20 +1,62 @@
 #include "../include/inputmanager.h"
-#include "../include/registrable.h"
+#include "../include/iregistrable.h"
+//#include "../include/igesture.h"
+#include "../include/clickgesture.h"
+
+#include "../include/mousecontroller.h"
+#include "../include/keyboardcontroller.h"
 
 CInputManager * CInputManager::inputmanager = nullptr;
 
 CInputManager &CInputManager::Instance() {
-	if (!inputmanager)
+	if (!inputmanager) {
 		inputmanager = new CInputManager();
+		if (inputmanager->Init()) {
+			delete inputmanager;
+			inputmanager = nullptr;
+		}
+	}
 	return *inputmanager;
+}
+
+CInputManager::Storable::Storable(IRegistrable * const ob, const EEventController e,
+	const uint32 id) {
+	m_observer = ob;
+	m_controller = e;
+	m_id = id;
 }
 
 CInputManager::CInputManager() {}
 
-void CInputManager::Register(IRegistrable *obj, EEventController controller, uint32 eventId) {
+uint8 CInputManager::Init() {
+	uint8 ret = 0;
+
+	keyboardController = new CKeyboardController();
+	if (keyboardController->Init()) {
+		ret = 1;
+	}
+
+	mouseController = new CMouseController();
+	if (mouseController->Init()) {
+		ret = 1;
+	}
+
+	m_gestureManagers.Add(new CClickGesture());
+
+	return ret;
+}
+
+CInputManager::~CInputManager() {
+	for (uint32 i = 0; i < m_observers.Size(); i++) {
+		delete m_observers[i];
+	}
+}
+
+void CInputManager::Register(IRegistrable * const obj, const EEventController controller,
+		const uint32 eventId) {
 	uint32 i = 0;
 	bool alreadyIn = false;
-	while (i < m_observers.Size()) {		//inefficient -> sort array (binary search)
+	while (i < m_observers.Size()) { //inefficient -> sort array (binary search)
 		if (m_observers[i]->m_observer == obj && m_observers[i]->m_controller == controller
 				&& m_observers[i]->m_id == eventId) {
 			alreadyIn = true;
@@ -27,7 +69,8 @@ void CInputManager::Register(IRegistrable *obj, EEventController controller, uin
 }
 
 /* returns false if obj was not in the list */
-bool CInputManager::Unregister(IRegistrable *obj, EEventController controller, uint32 eventId) {
+bool CInputManager::Unregister(IRegistrable * const obj, const EEventController controller,
+		const uint32 eventId) {
 	uint32 i = 0;
 	while (i < m_observers.Size()) { //inefficient -> sort array (binary search)
 		if (m_observers[i]->m_observer == obj && m_observers[i]->m_controller == controller
@@ -41,7 +84,16 @@ bool CInputManager::Unregister(IRegistrable *obj, EEventController controller, u
 }
 
 void CInputManager::Update() {
+	keyboardController->Update();
+	mouseController->Update();
+	ProcessGestures();
+	ManageEvents();
+}
 
+void CInputManager::ProcessGestures() {
+	for (uint16 i = 0; i < m_gestureManagers.Size(); i++) {
+		m_gestureManagers[i]->ModifyArray(m_events, m_events.Size());
+	}
 }
 
 void CInputManager::ManageEvents() {
@@ -59,18 +111,6 @@ void CInputManager::ManageEvents() {
 	}
 }
 
-void CInputManager::AddEvent(CEvent * ev) {
+void CInputManager::AddEvent(CEvent * const ev) {
 	m_events.Add(ev);
-}
-
-CInputManager::Storable::Storable(IRegistrable *ob, EEventController e, uint32 id) {
-	m_observer = ob;
-	m_controller = e;
-	m_id = id;
-}
-
-CInputManager::~CInputManager() {
-	for (uint32 i = 0; i < m_observers.Size(); i++) {
-		delete m_observers[i];
-	}
 }

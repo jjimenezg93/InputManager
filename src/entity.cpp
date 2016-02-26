@@ -7,15 +7,15 @@
 
 double genRandomF(double min, double max);
 
-CEntity::CEntity(String &filename) {
+CEntity::CEntity(const String &filename) {
 	m_sprite = new Sprite(ResourceManager::Instance().LoadImage(filename));
 }
 
-CEntity::CEntity(Image * img) {
+CEntity::CEntity(Image * const img) {
 	m_sprite = new Sprite(img);
 }
 
-void CEntity::Notify(CEvent * ev) {
+void CEntity::Notify(const CEvent * const ev) {
 	switch (ev->GetController()) {
 	case EEC_MOUSE:
 		ManageMouse(ev);
@@ -28,16 +28,16 @@ void CEntity::Notify(CEvent * ev) {
 	}
 }
 
-void CEntity::ManageMouse(CEvent * ev) {
-	if (ev->GetId() == 0) {
+void CEntity::ManageMouse(const CEvent * const ev) {
+	if (ev->GetId() == EME_LMB_PRESS) {
 		m_mustMove = true;
 		m_sprite->MoveTo(ev->GetX(), ev->GetY(), 150);
 	}
-	if (ev->GetId() == 1) {
+	if (ev->GetId() == EME_LMB_RELEASE) {
 		m_mustMove = false;
 		m_sprite->MoveTo(m_sprite->GetX(), m_sprite->GetY(), 150);
 	}
-	if (ev->GetId() == 2) {
+	if (ev->GetId() == EME_RMB_PRESS) {
 		m_sprite->SetColor(static_cast<uint8>(genRandomF(0, 255)),
 			static_cast<uint8>(genRandomF(0, 255)),
 			static_cast<uint8>(genRandomF(0, 255)),
@@ -45,8 +45,8 @@ void CEntity::ManageMouse(CEvent * ev) {
 	}
 }
 
-void CEntity::ManageKeyboard(CEvent * ev) {
-	if (ev->GetId() == 0) {
+void CEntity::ManageKeyboard(const CEvent * const ev) {
+	if (ev->GetId() == EME_LMB_PRESS) {
 		m_sprite->SetColor(static_cast<uint8>(genRandomF(0, 255)),
 			static_cast<uint8>(genRandomF(0, 255)),
 			static_cast<uint8>(genRandomF(0, 255)),
@@ -54,6 +54,6 @@ void CEntity::ManageKeyboard(CEvent * ev) {
 	}
 }
 
-void CEntity::Register(EEventController controller, uint32 id) {
+void CEntity::Register(const EEventController controller, const uint32 id) {
 	IInputManagerEntity::Register(this, controller, id);
 }
