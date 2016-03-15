@@ -7,36 +7,40 @@ enum EEventController {
 	EEC_MOUSE,
 	EEC_KEYBOARD,
 	EEC_PAD,
-	EEC_NONE };
+	EEC_COUNT // for iterating purposes
+};
 
 enum EMouseEventID {
+	EME_MOUSE_MOVED,
 	EME_LMB_PRESS,
 	EME_LMB_RELEASE,
 	EME_LMB_CLICK,
 	EME_RMB_PRESS,
 	EME_RMB_RELEASE,
-	EME_RMB_CLICK };
+	EME_COUNT // for iterating purposes
+};
 
 enum EKeyboardEventID {
-	EKE_SPACE
+	EKE_SPACE,
+	EKE_COUNT // for iterating purposes
 };
 
 class CEvent {
 public:
 	CEvent(const EEventController controller, const uint32 id,
-			const double x = 0, const double y = 0);
+			const int32 x = 0, const int32 y = 0);
 
 	EEventController GetController() const { return m_controller; }
 	uint32 GetId() const { return m_id; }
 
 	void SetId(EMouseEventID newId) { m_id = newId; }
 	
-	double GetX() const { return m_x; }
-	double GetY() const { return m_y; }
+	int32 GetX() const { return m_x; }
+	int32 GetY() const { return m_y; }
 private:
 	EEventController m_controller;
 	uint32 m_id;
-	double m_x, m_y;
+	int32 m_x, m_y;
 };
 
 #endif //!_C_EVENT_H

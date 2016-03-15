@@ -1,5 +1,7 @@
 //#pragma comment(linker, "/SUBSYSTEM:windows /ENTRY:mainCRTStartup")
 #include "../include/entity.h"
+#include "../include/controlmanagerui.h"
+#include "../include/buttonui.h"
 #include "../include/inputmanager.h"
 #include "../include/clickgesture.h"
 #include "../include/mousecontroller.h"
@@ -19,11 +21,16 @@ int main() {
 
 	assert(inputManager != nullptr);
 
-	entity.Register(EEC_MOUSE, 0);
-	entity.Register(EEC_MOUSE, 1);
-	entity.Register(EEC_MOUSE, 2);
-	entity.Register(EEC_MOUSE, 3);
-	entity.Register(EEC_KEYBOARD, 0);
+	CControlManagerUI * controlManager = new CControlManagerUI();
+
+	CButtonUI * button = new CButtonUI();
+	controlManager->AddControl(button);
+
+	entity.Register(EEC_MOUSE, EME_LMB_PRESS);
+	entity.Register(EEC_MOUSE, EME_LMB_RELEASE);
+	entity.Register(EEC_MOUSE, EME_LMB_CLICK);
+	entity.Register(EEC_MOUSE, EME_RMB_PRESS);
+	entity.Register(EEC_KEYBOARD, EKE_SPACE);
 
 	while (Screen::Instance().IsOpened() && !Screen::Instance().KeyPressed(GLFW_KEY_ESC)) {
 		Renderer::Instance().Clear();

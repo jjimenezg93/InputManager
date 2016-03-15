@@ -13,8 +13,7 @@ public:
 private:
 	void SendEvent(const uint32 id);
 	
-	int32 m_mouseX;
-	int32 m_mouseY;
+	int32 m_mouseX, m_mouseY, m_prevX, m_prevY;
 };
 
 #endif //!_C_MOUSE_CONTROLLER_H

@@ -21,8 +21,8 @@ public:
 	void AddEvent(CEvent * const ev);
 	void Update();
 private:
-	struct Storable {
-		Storable(IRegistrable * const ob, const EEventController e, const uint32 id);
+	struct IMObserver {
+		IMObserver(IRegistrable * const ob, const EEventController e, const uint32 id);
 		EEventController m_controller;
 		uint32 m_id;
 		IRegistrable * m_observer;
@@ -34,12 +34,12 @@ private:
 
 	static CInputManager * inputmanager;
 
-	Array<Storable *> m_observers;
+	Array<IMObserver *> m_observers;
 	Array<CEvent *> m_events;
 	Array<IGesture *> m_gestureManagers;
 
-	CMouseController * mouseController;
-	CKeyboardController * keyboardController;
+	CMouseController * m_mouseController;
+	CKeyboardController * m_keyboardController;
 };
 
 #endif //!_C_INPUT_MANAGER_H

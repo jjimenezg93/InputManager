@@ -24,7 +24,6 @@ public:
 
 	void Register(const EEventController controller, const uint32 id);
 private:
-	
 	Sprite * m_sprite;
 	bool m_mustMove;
 };

@@ -33,6 +33,10 @@ void CEntity::ManageMouse(const CEvent * const ev) {
 		m_mustMove = true;
 		m_sprite->MoveTo(ev->GetX(), ev->GetY(), 150);
 	}
+	// event to check if gestures working properly
+	/*if (ev->GetId() == EME_LMB_CLICK) {
+		m_sprite->SetColor(255, 0, 0, 255);
+	}*/
 	if (ev->GetId() == EME_LMB_RELEASE) {
 		m_mustMove = false;
 		m_sprite->MoveTo(m_sprite->GetX(), m_sprite->GetY(), 150);
@@ -46,7 +50,7 @@ void CEntity::ManageMouse(const CEvent * const ev) {
 }
 
 void CEntity::ManageKeyboard(const CEvent * const ev) {
-	if (ev->GetId() == EME_LMB_PRESS) {
+	if (ev->GetId() == EKE_SPACE) {
 		m_sprite->SetColor(static_cast<uint8>(genRandomF(0, 255)),
 			static_cast<uint8>(genRandomF(0, 255)),
 			static_cast<uint8>(genRandomF(0, 255)),

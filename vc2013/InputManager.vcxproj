@@ -88,17 +88,20 @@
     <ClInclude Include="..\include\array.h" />
     <ClInclude Include="..\include\bone.h" />
     <ClInclude Include="..\include\bonedata.h" />
+    <ClInclude Include="..\include\buttonui.h" />
     <ClInclude Include="..\include\camera.h" />
     <ClInclude Include="..\include\circlecollision.h" />
     <ClInclude Include="..\include\clickgesture.h" />
     <ClInclude Include="..\include\collision.h" />
     <ClInclude Include="..\include\collisionmanager.h" />
     <ClInclude Include="..\include\collisionpixeldata.h" />
+    <ClInclude Include="..\include\controlmanagerui.h" />
     <ClInclude Include="..\include\emitter.h" />
     <ClInclude Include="..\include\entity.h" />
     <ClInclude Include="..\include\event.h" />
     <ClInclude Include="..\include\font.h" />
     <ClInclude Include="..\include\frame.h" />
+    <ClInclude Include="..\include\ieventlistener.h" />
     <ClInclude Include="..\include\igesture.h" />
     <ClInclude Include="..\include\glinclude.h" />
     <ClInclude Include="..\include\glyph.h" />
@@ -108,6 +111,7 @@
     <ClInclude Include="..\include\map.h" />
     <ClInclude Include="..\include\mapscene.h" />
     <ClInclude Include="..\include\math.h" />
+    <ClInclude Include="..\include\messagesui.h" />
     <ClInclude Include="..\include\mousecontroller.h" />
     <ClInclude Include="..\include\nsinputmanagercontroller.h" />
     <ClInclude Include="..\include\nsinputmanagerentity.h" />
@@ -126,15 +130,18 @@
     <ClInclude Include="..\include\string.h" />
     <ClInclude Include="..\include\types.h" />
     <ClInclude Include="..\include\u-gine.h" />
+    <ClInclude Include="..\include\controlui.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\lib\stb_image.c" />
     <ClCompile Include="..\src\affector.cpp" />
     <ClCompile Include="..\src\bone.cpp" />
+    <ClCompile Include="..\src\buttonui.cpp" />
     <ClCompile Include="..\src\camera.cpp" />
     <ClCompile Include="..\src\clickgesture.cpp" />
     <ClCompile Include="..\src\collisionmanager.cpp" />
     <ClCompile Include="..\src\collisionpixeldata.cpp" />
+    <ClCompile Include="..\src\controlmanagerui.cpp" />
     <ClCompile Include="..\src\emitter.cpp" />
     <ClCompile Include="..\src\entity.cpp" />
     <ClCompile Include="..\src\event.cpp" />
@@ -159,6 +166,7 @@
     <ClCompile Include="..\src\skeletondata.cpp" />
     <ClCompile Include="..\src\skeletonsprite.cpp" />
     <ClCompile Include="..\src\sprite.cpp" />
+    <ClCompile Include="..\src\controlui.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

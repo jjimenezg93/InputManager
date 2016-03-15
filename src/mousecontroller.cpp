@@ -21,6 +21,12 @@ CMouseController::~CMouseController() {
 
 void CMouseController::Update() {
 	glfwGetMousePos(&m_mouseX, &m_mouseY);
+	if (m_mouseX != m_prevX || m_mouseY != m_prevY) {
+		SendEvent(EME_MOUSE_MOVED);
+	}
+	m_prevX = m_mouseX;
+	m_prevY = m_mouseY;
+
 	if (glfwGetMouseButton(GLFW_MOUSE_BUTTON_LEFT) == GLFW_PRESS) {
 		SendEvent(EME_LMB_PRESS);
 	}

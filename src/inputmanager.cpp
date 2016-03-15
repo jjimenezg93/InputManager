@@ -1,10 +1,9 @@
+#include "../include/clickgesture.h"
+#include "../include/controlmanagerui.h"
 #include "../include/inputmanager.h"
 #include "../include/iregistrable.h"
-//#include "../include/igesture.h"
-#include "../include/clickgesture.h"
-
-#include "../include/mousecontroller.h"
 #include "../include/keyboardcontroller.h"
+#include "../include/mousecontroller.h"
 
 CInputManager * CInputManager::inputmanager = nullptr;
 
@@ -19,7 +18,7 @@ CInputManager &CInputManager::Instance() {
 	return *inputmanager;
 }
 
-CInputManager::Storable::Storable(IRegistrable * const ob, const EEventController e,
+CInputManager::IMObserver::IMObserver(IRegistrable * const ob, const EEventController e,
 	const uint32 id) {
 	m_observer = ob;
 	m_controller = e;
@@ -31,13 +30,13 @@ CInputManager::CInputManager() {}
 uint8 CInputManager::Init() {
 	uint8 ret = 0;
 
-	keyboardController = new CKeyboardController();
-	if (keyboardController->Init()) {
+	m_keyboardController = new CKeyboardController();
+	if (m_keyboardController->Init()) {
 		ret = 1;
 	}
 
-	mouseController = new CMouseController();
-	if (mouseController->Init()) {
+	m_mouseController = new CMouseController();
+	if (m_mouseController->Init()) {
 		ret = 1;
 	}
 
@@ -60,12 +59,13 @@ void CInputManager::Register(IRegistrable * const obj, const EEventController co
 		if (m_observers[i]->m_observer == obj && m_observers[i]->m_controller == controller
 				&& m_observers[i]->m_id == eventId) {
 			alreadyIn = true;
+			break;
 		}
 		i++;
 	}
 
 	if (!alreadyIn)
-		m_observers.Add(new Storable(obj, controller, eventId));
+		m_observers.Add(new IMObserver(obj, controller, eventId));
 }
 
 /* returns false if obj was not in the list */
@@ -84,8 +84,8 @@ bool CInputManager::Unregister(IRegistrable * const obj, const EEventController 
 }
 
 void CInputManager::Update() {
-	keyboardController->Update();
-	mouseController->Update();
+	m_keyboardController->Update();
+	m_mouseController->Update();
 	ProcessGestures();
 	ManageEvents();
 }
