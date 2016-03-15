@@ -101,6 +101,7 @@
     <ClInclude Include="..\include\event.h" />
     <ClInclude Include="..\include\font.h" />
     <ClInclude Include="..\include\frame.h" />
+    <ClInclude Include="..\include\guirender.h" />
     <ClInclude Include="..\include\ieventlistener.h" />
     <ClInclude Include="..\include\igesture.h" />
     <ClInclude Include="..\include\glinclude.h" />
@@ -147,6 +148,7 @@
     <ClCompile Include="..\src\event.cpp" />
     <ClCompile Include="..\src\font.cpp" />
     <ClCompile Include="..\src\glyph.cpp" />
+    <ClCompile Include="..\src\guirender.cpp" />
     <ClCompile Include="..\src\image.cpp" />
     <ClCompile Include="..\src\inputmanager.cpp" />
     <ClCompile Include="..\src\keyboardcontroller.cpp" />

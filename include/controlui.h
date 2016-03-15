@@ -12,8 +12,8 @@ class IEventListener;
 class CControlUI {
 public:
 	virtual uint8 Init() = 0;
-	virtual void Update() = 0;
-	virtual void Render() = 0;
+	virtual void Update();
+	virtual void Render();
 	virtual void ManageEvent(const CEvent * const ev); //manages input event and then reproduces it
 	//ManageEvent should return uint8 to inform if control consumes event
 	virtual void AddEventListener(IEventListener * const eventListener);
@@ -23,7 +23,6 @@ public:
 protected:
 	std::vector<IEventListener *> m_listeners;
 	std::vector<CControlUI *> m_controls;
-	Sprite * m_sprite;
 };
 
 #endif //!_C_CONTROL_UI_H

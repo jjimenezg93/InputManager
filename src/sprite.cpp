@@ -230,6 +230,9 @@ void Sprite::Render() const {
 	Renderer::Instance().SetColor(m_r, m_g, m_b, m_a);
 
 	Renderer::Instance().DrawImage(m_image, m_x, m_y, m_currentFrame, m_image->GetWidth() * m_scalex, m_image->GetHeight() * m_scaley, m_angle);
+
+	//fix: this way color only affects this sprite
+	Renderer::Instance().SetColor(255, 255, 255, 255); 
 }
 
 void Sprite::UpdateCollisionBox() {

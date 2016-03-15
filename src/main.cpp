@@ -13,32 +13,49 @@
 
 int main() {
 	Screen::Instance().Open(800, 600, false);
-	Image * alienImg = ResourceManager::Instance().LoadImage("data/alien.png");
+	/*Image * alienImg = ResourceManager::Instance().LoadImage("data/alien.png");
 	alienImg->SetMidHandle();
-	CEntity entity(alienImg);
+	CEntity entity(alienImg);*/
+
+	Image * buttonImgDefault = ResourceManager::Instance().LoadImage("data/button_default.png");
+	buttonImgDefault->SetMidHandle();
+	Image * buttonImgOnHover = ResourceManager::Instance().LoadImage("data/button_onHover.png");
+	buttonImgOnHover->SetMidHandle();
 
 	CInputManager * inputManager = &CInputManager::Instance();
 
 	assert(inputManager != nullptr);
 
-	CControlManagerUI * controlManager = new CControlManagerUI();
+	CControlManagerUI controlManager;
 
-	CButtonUI * button = new CButtonUI();
-	controlManager->AddControl(button);
+	controlManager.Init();
 
-	entity.Register(EEC_MOUSE, EME_LMB_PRESS);
+	CButtonUI button;
+	button.Init(50, 50, buttonImgDefault, buttonImgOnHover);
+	controlManager.AddControl(&button);
+
+	CButtonUI button2;
+	button2.Init(100, 50, buttonImgDefault, buttonImgOnHover);
+	controlManager.AddControl(&button2);
+
+	/*entity.Register(EEC_MOUSE, EME_LMB_PRESS);
 	entity.Register(EEC_MOUSE, EME_LMB_RELEASE);
 	entity.Register(EEC_MOUSE, EME_LMB_CLICK);
 	entity.Register(EEC_MOUSE, EME_RMB_PRESS);
-	entity.Register(EEC_KEYBOARD, EKE_SPACE);
+	entity.Register(EEC_KEYBOARD, EKE_SPACE);*/
+
+	Renderer::Instance().SetBlendMode(Renderer::BlendMode::ALPHA);
 
 	while (Screen::Instance().IsOpened() && !Screen::Instance().KeyPressed(GLFW_KEY_ESC)) {
 		Renderer::Instance().Clear();
 
 		inputManager->Update();
 
-		entity.GetSprite()->Update(Screen::Instance().ElapsedTime());
-		entity.GetSprite()->Render();
+		controlManager.Update();
+		controlManager.Render();
+
+		//entity.GetSprite()->Update(Screen::Instance().ElapsedTime());
+		//entity.GetSprite()->Render();
 
 		Screen::Instance().Refresh();
 	}

@@ -1,10 +1,23 @@
 #include "../include/controlui.h"
 #include "../include/event.h"
 #include "../include/ieventlistener.h"
-//#include "../include/messagesui.h"
+
+void CControlUI::Update() {
+	for (std::vector<CControlUI *>::iterator itr = m_controls.begin();
+	itr != m_controls.end(); ++itr) {
+		(*itr)->Update();
+	}
+}
+
+void CControlUI::Render() {
+	for (std::vector<CControlUI *>::iterator itr = m_controls.begin();
+	itr != m_controls.end(); ++itr) {
+		(*itr)->Render();
+	}
+}
 
 void CControlUI::ManageEvent(const CEvent * const ev) {
-	//manage event by itself before reproducing it
+	//method to be called from all childs after managing the event by themselves
 	for (std::vector<CControlUI *>::iterator itr = m_controls.begin();
 			itr != m_controls.end(); itr++) {
 		(*itr)->ManageEvent(ev);

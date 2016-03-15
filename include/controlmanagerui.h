@@ -15,6 +15,9 @@ public:
 	virtual void Notify(const CEvent * const);
 	void AddControl(CControlUI * const);
 	void RemoveControl(CControlUI * const);
+
+	void Update();
+	void Render();
 private:
 	std::vector<CControlUI *> m_controls;
 };
