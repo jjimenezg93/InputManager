@@ -4,13 +4,15 @@
 #include "types.h"
 
 #include "event.h"
+#include "ieventlistener.h"
 #include "iregistrable.h"
 
 class Sprite;
 class String;
 class Image;
+class CControlUI;
 
-class CEntity: public IRegistrable {
+class CEntity: public IRegistrable, public IEventListener {
 public:
 	CEntity(const String &filename);
 	CEntity(Image * const img);
@@ -18,6 +20,8 @@ public:
 	Sprite * GetSprite() const { return m_sprite; }
 
 	virtual void Notify(const CEvent * const ev);
+
+	//virtual void OnClick(CControlUI * sender);
 	
 	void ManageMouse(const CEvent * const ev);
 	void ManageKeyboard(const CEvent * const ev);

@@ -16,17 +16,19 @@ void CControlUI::Render() {
 	}
 }
 
-void CControlUI::ManageEvent(const CEvent * const ev) {
+bool CControlUI::ManageEvent(const CEvent * const ev) {
+	bool consumed = false;
+
 	//method to be called from all childs after managing the event by themselves
-	for (std::vector<CControlUI *>::iterator itr = m_controls.begin();
-			itr != m_controls.end(); itr++) {
-		(*itr)->ManageEvent(ev);
+	std::vector<CControlUI *>::reverse_iterator itr = m_controls.rbegin();
+	while (itr != m_controls.rend()) {
+		if ((*itr++)->ManageEvent(ev)) {
+			consumed = true;
+			break;
+		}
 	}
 
-	for (std::vector<IEventListener *>::iterator itr = m_listeners.begin();
-			itr != m_listeners.end(); itr++) {
-		(*itr)->ManageEvent(ev);
-	}
+	return consumed;
 }
 
 void CControlUI::AddEventListener(IEventListener * const eventListener) {
@@ -55,4 +57,12 @@ void CControlUI::RemoveControl(CControlUI * const control) {
 		}
 		++itr;
 	}
+}
+
+CGUIRender & CControlUI::GetGUIRender() {
+	return m_guirender;
+}
+
+void CControlUI::SetState(EGUICurrentState newState) {
+	m_currentState = newState;
 }

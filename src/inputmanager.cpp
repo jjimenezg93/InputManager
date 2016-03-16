@@ -19,7 +19,7 @@ CInputManager &CInputManager::Instance() {
 }
 
 CInputManager::IMObserver::IMObserver(IRegistrable * const ob, const EEventController e,
-	const uint32 id) {
+const uint32 id) {
 	m_observer = ob;
 	m_controller = e;
 	m_id = id;
@@ -52,12 +52,12 @@ CInputManager::~CInputManager() {
 }
 
 void CInputManager::Register(IRegistrable * const obj, const EEventController controller,
-		const uint32 eventId) {
+const uint32 eventId) {
 	uint32 i = 0;
 	bool alreadyIn = false;
 	while (i < m_observers.Size()) { //inefficient -> sort array (binary search)
 		if (m_observers[i]->m_observer == obj && m_observers[i]->m_controller == controller
-				&& m_observers[i]->m_id == eventId) {
+		&& m_observers[i]->m_id == eventId) {
 			alreadyIn = true;
 			break;
 		}

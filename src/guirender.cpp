@@ -7,7 +7,7 @@
 
 CGUIRender::CGUIRender(Image * default, Image * onHover, Image * inactive) {
 	m_defaultImg = default;
-	m_onHoverImg = onHover;
+	m_onClickImg = onHover;
 	m_inactiveImg = inactive;
 }
 
@@ -17,10 +17,10 @@ void CGUIRender::SetDefaultImg(Image * img) {
 	m_defaultImg = img;
 }
 
-void CGUIRender::SetOnHovertImg(Image * img) {
+void CGUIRender::SetOnClickImg(Image * img) {
 	if (img)
 		img->SetMidHandle();
-	m_onHoverImg = img;
+	m_onClickImg = img;
 }
 
 void CGUIRender::SetInactiveImg(Image * img) {
@@ -34,11 +34,14 @@ Image * CGUIRender::GetCurrentImg(EGUICurrentState state) {
 	case EGUICS_DEFAULT:
 		return m_defaultImg;
 		break;
-	case EGUICS_ONHOVER:
-		return m_onHoverImg;
+	case EGUICS_ONCLICK:
+		return m_onClickImg;
 		break;
 	case EGUICS_INACTIVE:
 		return m_inactiveImg;
+		break;
+	default:
+		return nullptr;
 		break;
 	}
 }

@@ -1,17 +1,19 @@
-#ifndef _C_BUTTON_UI_H
-#define _C_BUTTON_UI_H
+#ifndef _C_CHECKBOX_UI_H
+#define _C_CHECKBOX_UI_H
 
 #include "controlui.h"
 #include "guirender.h"
 #include "types.h"
 
+#include <vector>
+
 class SMessage;
 class IEventListener;
 class CGUIRender;
 
-class CButtonUI: public CControlUI {
+class CCheckBoxUI: public CControlUI {
 public:
-	CButtonUI() {}
+	CCheckBoxUI() {}
 
 	virtual uint8 Init();
 	uint8 Init(int32 x, int32 y);
@@ -21,11 +23,17 @@ public:
 
 	virtual void Update();
 	virtual void Render();
+
+	void AddComplementary(CControlUI * compl);
+	void RemoveComplementary(CControlUI * compl);
+
+	void UpdateComplementariesState();
 private:
 	bool MouseIsOver(const CEvent * const ev);
 
 	int32 m_x, m_y;
-	bool m_pressed;
+
+	std::vector<CControlUI *> m_complementaries;
 };
 
-#endif //!_C_BUTTON_UI_H
+#endif //!_C_CHECKBOX_UI_H

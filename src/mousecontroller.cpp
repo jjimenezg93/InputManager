@@ -12,6 +12,10 @@ uint8 CMouseController::Init() {
 	if (!glfwInit()) {
 		ret = 1;
 	}
+	glfwGetMousePos(&m_mouseX, &m_mouseY);
+	m_prevX = m_mouseX;
+	m_prevY = m_mouseY;
+
 	return ret;
 }
 

@@ -14,9 +14,11 @@ uint8 CControlManagerUI::Init() {
 }
 
 void CControlManagerUI::Notify(const CEvent * const ev) {
-	for (std::vector<CControlUI *>::iterator itr = m_controls.begin();
-	itr != m_controls.end(); ++itr) {
-		(*itr)->ManageEvent(ev);
+	std::vector<CControlUI *>::reverse_iterator itr = m_controls.rbegin();
+	while(itr != m_controls.rend()) {
+		if ((*itr++)->ManageEvent(ev)) {
+			break;
+		}
 	}
 }
 

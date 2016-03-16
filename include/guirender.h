@@ -7,8 +7,9 @@ class Image;
 
 enum EGUICurrentState {
 	EGUICS_DEFAULT,
-	EGUICS_ONHOVER,
-	EGUICS_INACTIVE
+	EGUICS_ONCLICK,
+	EGUICS_INACTIVE,
+	EGUICS_COUNT //iterating purposes
 };
 
 class CGUIRender {
@@ -19,7 +20,7 @@ public:
 	// all defined in .cpp in order to allow image deleting more decoupled if
 	// a method to delete 1 image is added to ResourceManager
 	virtual void SetDefaultImg(Image * img);
-	virtual void SetOnHovertImg(Image * img);
+	virtual void SetOnClickImg(Image * img);
 	virtual void SetInactiveImg(Image * img);
 
 	Image * GetCurrentImg(EGUICurrentState state);
@@ -27,7 +28,7 @@ public:
 	virtual void Render(EGUICurrentState state, int32 x, int32 y);
 private:
 	Image * m_defaultImg;
-	Image * m_onHoverImg;
+	Image * m_onClickImg;
 	Image * m_inactiveImg;
 };
 
