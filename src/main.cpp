@@ -40,22 +40,23 @@ int main() {
 
 	//slider Imgs
 	Image * sliderBallImg = ResourceManager::Instance().LoadImage("data/slider_ball.png");	
-	sliderBallImg->SetHandle(0, 0.5);
+	sliderBallImg->SetHandle(0, 0.5f);
 	Image * sliderBarImg = ResourceManager::Instance().LoadImage("data/slider_bar.png");
-	sliderBarImg->SetHandle(0, 0.5);
+	sliderBarImg->SetHandle(0, 0.5f);
 	Image * sliderLeftDefaultImg = ResourceManager::Instance().LoadImage(
 		"data/slider_left_default.png");
-	sliderLeftDefaultImg->SetHandle(0, 0.5);
+	sliderLeftDefaultImg->SetHandle(0, 0.5f);
 	Image * sliderRightDefaultImg = ResourceManager::Instance().LoadImage(
 		"data/slider_right_default.png");
-	sliderRightDefaultImg->SetHandle(0, 0.5);
+	sliderRightDefaultImg->SetHandle(0, 0.5f);
 	Image * sliderLeftOnClickImg = ResourceManager::Instance().LoadImage(
 		"data/slider_left_onclick.png");
-	sliderLeftOnClickImg->SetHandle(0, 0.5);
+	sliderLeftOnClickImg->SetHandle(0, 0.5f);
 	Image * sliderRightOnClickImg = ResourceManager::Instance().LoadImage(
 		"data/slider_right_onclick.png");
-	sliderRightOnClickImg->SetHandle(0, 0.5);
+	sliderRightOnClickImg->SetHandle(0, 0.5f);
 
+	//Input & Control managers
 	CInputManager * inputManager = &CInputManager::Instance();
 
 	assert(inputManager != nullptr);
@@ -64,6 +65,7 @@ int main() {
 
 	controlManager.Init();
 
+	//Controls
 	CButtonUI button;
 	button.SetId(0);
 	button.Init(50, 50, buttonImgDefault, buttonImgOnClick, buttonImgInactive);
@@ -78,6 +80,7 @@ int main() {
 	CSliderUI slider;
 	slider.Init(400, 400, 0, 10, sliderBarImg, sliderBallImg, sliderLeftDefaultImg,
 		sliderLeftOnClickImg, sliderRightDefaultImg, sliderRightOnClickImg);
+	slider.SetId(0);
 	controlManager.AddControl(&slider);
 
 	CCheckBoxUI checkbox;
@@ -92,8 +95,6 @@ int main() {
 	checkbox3.Init(350, 100, checkboxImgDefault, checkboxImgOnClick);
 	controlManager.AddControl(&checkbox3);
 
-	//array y pasar ref en Init o en AddComplementaries() de los CheckBox ??
-	//nuevo control grupo de checkboxes que sea listener de los 3 y sea el que gestione array
 	checkbox.AddComplementary(&checkbox2);
 	checkbox.AddComplementary(&checkbox3);
 	checkbox2.AddComplementary(&checkbox);
@@ -103,6 +104,9 @@ int main() {
 	checkbox.SetCurrentState(EGUICS_ONCLICK);
 
 	button2.AddEventListener(&entity);
+	slider.AddEventListener(&entity);
+	entity.GetSprite()->SetColor(entity.GetSprite()->GetRed(), entity.GetSprite()->GetGreen(),
+		entity.GetSprite()->GetBlue(), 0);
 	/*entity.Register(EEC_MOUSE, EME_LMB_PRESS);
 	entity.Register(EEC_MOUSE, EME_LMB_RELEASE);
 	entity.Register(EEC_MOUSE, EME_LMB_CLICK);

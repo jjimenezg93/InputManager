@@ -6,8 +6,8 @@
 class CKeyboardController {
 public:
 	CKeyboardController();
-	uint8 Init();
 	~CKeyboardController();
+	uint8 Init();
 
 	void Update();
 private:

@@ -7,7 +7,7 @@ enum EEventController {
 	EEC_MOUSE,
 	EEC_KEYBOARD,
 	EEC_PAD,
-	EEC_COUNT // for iterating purposes
+	EEC_COUNT //iterating
 };
 
 enum EMouseEventID {
@@ -17,12 +17,12 @@ enum EMouseEventID {
 	EME_LMB_CLICK,
 	EME_RMB_PRESS,
 	EME_RMB_RELEASE,
-	EME_COUNT // for iterating purposes
+	EME_COUNT //iterating
 };
 
 enum EKeyboardEventID {
 	EKE_SPACE,
-	EKE_COUNT // for iterating purposes
+	EKE_COUNT //iterating
 };
 
 class CEvent {
@@ -33,7 +33,7 @@ public:
 	EEventController GetController() const { return m_controller; }
 	uint32 GetId() const { return m_id; }
 
-	void SetId(EMouseEventID newId) { m_id = newId; }
+	void SetId(const EMouseEventID newId) { m_id = newId; }
 	
 	int32 GetX() const { return m_x; }
 	int32 GetY() const { return m_y; }

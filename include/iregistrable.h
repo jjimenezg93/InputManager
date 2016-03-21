@@ -6,7 +6,6 @@ class CEvent;
 class IRegistrable {
 public:
 	virtual void Notify(const CEvent * const) {}
-	//virtual void ManageEvent(const CEvent * const) {}
 };
 
 #endif //!_I_REGISTRABLE_H

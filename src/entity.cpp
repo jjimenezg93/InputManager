@@ -1,11 +1,13 @@
-#include "../include/controlui.h"
 #include "../include/buttonui.h"
+#include "../include/controlui.h"
 #include "../include/entity.h"
+#include "../include/event.h"
+#include "../include/image.h"
 #include "../include/nsinputmanagerentity.h"
-
+#include "../include/resourcemanager.h"
+#include "../include/sliderui.h"
 #include "../include/sprite.h"
 #include "../include/string.h"
-#include "../include/resourcemanager.h"
 
 #include <iostream>
 
@@ -17,6 +19,10 @@ CEntity::CEntity(const String &filename) {
 
 CEntity::CEntity(Image * const img) {
 	m_sprite = new Sprite(img);
+}
+
+CEntity::~CEntity() {
+	delete m_sprite; //sprite's img should be cleaned in ResourceManager::FreeResources()
 }
 
 void CEntity::Notify(const CEvent * const ev) {
@@ -32,12 +38,17 @@ void CEntity::Notify(const CEvent * const ev) {
 	}
 }
 
-void CEntity::ManageControlEvent(CControlUI * sender) {
+void CEntity::ManageControlEvent(CControlUI * const sender) {
 	switch (sender->GetType()) {
 	case ECT_BUTTON:
-		//debug
 		std::cout << "ENTITY received Button" << std::endl;
-		m_sprite->SetColor(255, 0, 255, 255);
+		m_sprite->SetColor(255, 0, 255, m_sprite->GetAlpha());
+		break;
+	case ECT_SLIDER:
+		std::cout << "ENTITY received Slider" << std::endl;
+		m_sprite->SetColor(m_sprite->GetRed(), m_sprite->GetGreen(), m_sprite->GetBlue(),
+			static_cast<uint8>(25 * static_cast<CSliderUI *>(sender)->GetValue()));
+		//alpha = [0,255] -> 25 * [0,10]
 		break;
 	default:
 		break;

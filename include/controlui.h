@@ -22,13 +22,19 @@ enum EGUICurrentState;
 
 class CControlUI {
 public:
+	virtual ~CControlUI() {}
+
 	virtual uint8 Init() = 0;
+
 	virtual void Update();
 	virtual void Render();
-	virtual bool ManageEvent(const CEvent * const ev); //manages input event and then reproduces it
-	//ManageEvent should return uint8 to inform if control consumes event
+
+	//ManageEvent() manages input event and then reproduces it, return says if event was consumed
+	virtual bool ManageEvent(const CEvent * const ev);
+
 	virtual void AddEventListener(IEventListener * const eventListener);
 	virtual void RemoveEventListener(IEventListener * const eventListener);
+
 	virtual void AddControl(CControlUI * const control);
 	virtual void RemoveControl(CControlUI * const control);
 
@@ -38,11 +44,11 @@ public:
 	EControlType GetType() const { return m_type; }
 
 	CGUIRender & GetGUIRender();
-	void SetCurrentState(EGUICurrentState newState);
+	void SetCurrentState(const EGUICurrentState newState);
 	EGUICurrentState GetCurrentState() const { return m_currentState; }
 protected:
-	void SetType(EControlType type);
-	void NotifyListeners(CControlUI * sender);
+	void SetType(const EControlType type);
+	void NotifyListeners(CControlUI * const sender);
 private:
 	std::vector<IEventListener *> m_listeners;
 	std::vector<CControlUI *> m_controls;

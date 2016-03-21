@@ -2,37 +2,41 @@
 #include "../include/event.h"
 #include "../include/ieventlistener.h"
 #include "../include/image.h"
-#include "../include/types.h"
-
 #include "../include/renderer.h"
+#include "../include/types.h"
 
 #include <iostream>
 
 double genRandomF(double min, double max);
 
+CButtonUI::~CButtonUI() {}
+
 uint8 CButtonUI::Init() {
+	uint8 ret = 0;
 	m_pressed = false;
 	SetType(ECT_BUTTON);
 	SetCurrentState(EGUICS_DEFAULT);
-	return 0;
+	return ret;
 }
 
-uint8 CButtonUI::Init(int32 x, int32 y) {
-	Init();
+uint8 CButtonUI::Init(const int32 x, const int32 y) {
+	uint8 ret = 0;
+	ret = Init();
 	m_x = x;
 	m_y = y;
-	return 0;
+	return ret;
 }
 
-uint8 CButtonUI::Init(int32 x, int32 y, Image * default, Image * onHover, Image * inactive) {
+uint8 CButtonUI::Init(const int32 x, const int32 y, Image * const defaultImg,
+		Image * const onHoverImg, Image * const inactiveImg) {
 	Init(x, y);
-	GetGUIRender().SetDefaultImg(default);
-	GetGUIRender().SetOnClickImg(onHover);
-	GetGUIRender().SetInactiveImg(inactive);
+	GetGUIRender().SetDefaultImg(defaultImg);
+	GetGUIRender().SetOnClickImg(onHoverImg);
+	GetGUIRender().SetInactiveImg(inactiveImg);
 	return 0;
 }
 
-void CButtonUI::SetPosition(int32 x, int32 y) {
+void CButtonUI::SetPosition(const int32 x, const int32 y) {
 	m_x = x;
 	m_y = y;
 }

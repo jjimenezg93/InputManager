@@ -6,23 +6,24 @@
 #include "sliderrender.h"
 #include "types.h"
 
-class SMessage;
-class CSliderRender;
-
 class CSliderUI: public CControlUI, public IEventListener {
 public:
 	CSliderUI() {}
+	~CSliderUI();
 
-	uint8 Init() { return 0; }
-	uint8 Init(int32 x, int32 y, int32 minVal, int32 maxVal, Image * bar, Image * ball,
-		Image * lDefault, Image * lOnClick, Image * rDefault, Image * rOnClick);
-
-	virtual void ManageControlEvent(CControlUI * sender);
-
-	virtual bool ManageEvent(const CEvent * const ev);
+	uint8 Init();
+	uint8 Init(const int32 x, const int32 y, const int32 minVal, const int32 maxVal,
+		Image * const bar, Image * const ball, Image * const lDefault,
+		Image * const lOnClick, Image * const rDefault, Image * const rOnClick);
 
 	virtual void Update();
 	virtual void Render();
+
+	virtual void ManageControlEvent(CControlUI * const sender);
+
+	float GetValue() const;
+
+	virtual bool ManageEvent(const CEvent * const ev);
 private:
 	int32 m_x, m_y;
 	float m_ballValue, m_ballRate;

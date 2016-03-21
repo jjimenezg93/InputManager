@@ -1,56 +1,32 @@
-#include "..\include\checkboxui.h"
+#include "../include/checkboxui.h"
 #include "../include/event.h"
+#include "../include/guirender.h"
 #include "../include/ieventlistener.h"
 #include "../include/image.h"
 #include "../include/types.h"
-
 #include "../include/renderer.h"
 
 uint8 CCheckBoxUI::Init() {
-	return 0;
+	uint8 ret = 0;
+	return ret;
 }
 
 uint8 CCheckBoxUI::Init(int32 x, int32 y) {
+	uint8 ret = 0;
+	ret = Init();
 	m_x = x;
 	m_y = y;
 	SetType(ECT_CHECKBOX);
 	SetCurrentState(EGUICS_DEFAULT);
-	return 0;
+	return ret;
 }
 
 uint8 CCheckBoxUI::Init(int32 x, int32 y, Image * default, Image * onHover, Image * inactive) {
-	Init(x, y);
+	uint8 ret = 0;
+	ret = Init(x, y);
 	GetGUIRender().SetDefaultImg(default);
 	GetGUIRender().SetOnClickImg(onHover);
 	GetGUIRender().SetInactiveImg(inactive);
-	return 0;
-}
-
-bool CCheckBoxUI::ManageEvent(const CEvent * const ev) {
-	bool ret = false;
-	if (GetCurrentState() != EGUICS_INACTIVE) {
-		if (ev->GetController() == EEC_MOUSE) {
-			switch (ev->GetId()) {
-			case EME_LMB_CLICK:
-				if (MouseIsOver(ev)) {
-					if (GetCurrentState() == EGUICS_DEFAULT)
-						SetCurrentState(EGUICS_ONCLICK);
-					std::vector<CControlUI *>::iterator itr = m_complementaries.begin();
-					while (itr != m_complementaries.end()) {
-						if ((*itr)->GetType() == ECT_CHECKBOX) {
-							((CCheckBoxUI*)(*itr))->UpdateComplementariesState();
-						}
-						itr++;
-					}
-					ret = true;
-				}
-				break;
-			default:
-				break;
-			}
-
-		}
-	}
 	return ret;
 }
 
@@ -63,11 +39,37 @@ void CCheckBoxUI::Render() {
 	CControlUI::Render();
 }
 
-void CCheckBoxUI::AddComplementary(CControlUI * compl) {
-	m_complementaries.push_back(compl);
+bool CCheckBoxUI::ManageEvent(const CEvent * const ev) {
+	bool consumed = false;
+	if (GetCurrentState() != EGUICS_INACTIVE) {
+		if (ev->GetController() == EEC_MOUSE) {
+			switch (ev->GetId()) {
+			case EME_LMB_CLICK:
+				if (MouseIsOver(ev)) {
+					if (GetCurrentState() == EGUICS_DEFAULT)
+						SetCurrentState(EGUICS_ONCLICK);
+					//must be replaced with ControlGroup
+					std::vector<CControlUI *>::iterator itr = m_complementaries.begin();
+					while (itr != m_complementaries.end()) {
+						if ((*itr)->GetType() == ECT_CHECKBOX) {
+							((CCheckBoxUI*)(*itr))->UpdateComplementariesState();
+						}
+						itr++;
+					}
+					consumed = true;
+				}
+				break;
+			default:
+				break;
+			}
+
+		}
+	}
+	return consumed;
 }
 
-void CCheckBoxUI::RemoveComplementary(CControlUI * compl) {
+void CCheckBoxUI::AddComplementary(CControlUI * compl) {
+	m_complementaries.push_back(compl);
 }
 
 void CCheckBoxUI::UpdateComplementariesState() {

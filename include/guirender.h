@@ -9,25 +9,26 @@ enum EGUICurrentState {
 	EGUICS_DEFAULT,
 	EGUICS_ONCLICK,
 	EGUICS_INACTIVE,
-	EGUICS_COUNT //iterating purposes
+	EGUICS_COUNT //iterating
 };
 
 class CGUIRender {
 public:
 	CGUIRender() {}
-	CGUIRender(Image * default, Image * onClick, Image * inactive); //images always with midHandle
+	//images are supposed to have mid handle
+	CGUIRender(Image * const defaultImg, Image * const onClickImg, Image * const inactiveImg);
 
-	// all defined in .cpp in order to allow image deleting more decoupled if
-	// a method to delete 1 image is added to ResourceManager
+	~CGUIRender();
+
+	void Render(const EGUICurrentState state, const int32 x, const int32 y);
+
 	void SetDefaultImg(Image * const img);
 	void SetOnClickImg(Image * const img);
 	void SetInactiveImg(Image * const img);
 
-	Image * GetCurrentImg(EGUICurrentState state) const;
-	uint16 GetCurrImgWidth(EGUICurrentState state) const;
-	uint16 GetCurrImgHeight(EGUICurrentState state) const;
-
-	void Render(EGUICurrentState state, int32 x, int32 y);
+	Image * const GetCurrentImg(const EGUICurrentState state) const;
+	uint16 GetCurrImgWidth(const EGUICurrentState state) const;
+	uint16 GetCurrImgHeight(const EGUICurrentState state) const;
 private:
 	Image * m_defaultImg;
 	Image * m_onClickImg;

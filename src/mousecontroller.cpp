@@ -1,17 +1,15 @@
-#include "../include/mousecontroller.h"
 #include "../include/event.h"
+#include "../include/mousecontroller.h"
 #include "../include/nsinputmanagercontroller.h"
 
 #include "../lib/glfw.h"
 
-CMouseController::CMouseController() {
-}
+CMouseController::CMouseController() {}
 
 uint8 CMouseController::Init() {
 	uint8 ret = 0;
-	if (!glfwInit()) {
-		ret = 1;
-	}
+	ret = !glfwInit();
+
 	glfwGetMousePos(&m_mouseX, &m_mouseY);
 	m_prevX = m_mouseX;
 	m_prevY = m_mouseY;

@@ -1,9 +1,7 @@
 #ifndef _C_SLIDER_RENDER_H
 #define _C_SLIDER_RENDER_H
 
-#include "ieventlistener.h"
 #include "types.h"
-#include "guirender.h"
 
 class Image;
 class CButtonUI;
@@ -18,25 +16,27 @@ enum ESliderImg {
 class CSliderRender {
 public:
 	CSliderRender() {}
+	~CSliderRender();
 
-	uint8 Init(Image * bar, Image * ball, Image * lDefault,
-		Image * lOnClick, Image * rDefault, Image * rOnClick); //images always with midHandle
+	//images always with midHandle
+	uint8 Init(Image * const bar, Image * const ball, Image * const lDefault,
+		Image * const lOnClick, Image * const rDefault, Image * const rOnClick);
+
+	void Render(const ESliderImg eImg, const int32 x, const int32 y);
 
 	void SetBarImg(Image * const img);
 	void SetBallImg(Image * const img);
-	void SetLButtonImg(Image * defaultImg, Image * onClickImg);
-	void SetRButtonImg(Image * defaultImg, Image * onClickImg);
+	void SetLButtonImg(Image * const defaultImg, Image * const onClickImg);
+	void SetRButtonImg(Image * const defaultImg, Image * const onClickImg);
 
-	Image * GetImage(ESliderImg eImg);
+	Image * GetImage(const ESliderImg eImg);
 
-	int32 GetImageWidth(ESliderImg eImg);
+	int32 GetImageWidth(const ESliderImg eImg);
 
-	CButtonUI & GetLButton() { return *m_leftButton; }
-	CButtonUI & GetRButton() { return *m_rightButton; }
+	CButtonUI & GetLButton() const { return *m_leftButton; }
+	CButtonUI & GetRButton() const { return *m_rightButton; }
 	
 	bool MangeEventButtons(const CEvent * const ev);
-
-	void Render(ESliderImg eImg, int32 x, int32 y);
 private:
 	Image * m_barImg;
 	Image * m_ballImg;

@@ -2,7 +2,7 @@
 #define _C_CONTROL_MANAGER_UI_H
 
 #include "iregistrable.h"
-#include "../include/types.h"
+#include "types.h"
 
 #include <vector>
 

@@ -18,8 +18,8 @@ void CControlUI::Render() {
 
 bool CControlUI::ManageEvent(const CEvent * const ev) {
 	bool consumed = false;
-
-	//method to be called from all childs after managing the event by themselves
+	
+	//using reverse_iterator so the latest control ("closer" in screen), consumes event first
 	std::vector<CControlUI *>::reverse_iterator itr = m_controls.rbegin();
 	while (itr != m_controls.rend()) {
 		if ((*itr++)->ManageEvent(ev)) {
@@ -63,15 +63,15 @@ CGUIRender & CControlUI::GetGUIRender() {
 	return m_guirender;
 }
 
-void CControlUI::SetCurrentState(EGUICurrentState newState) {
+void CControlUI::SetCurrentState(const EGUICurrentState newState) {
 	m_currentState = newState;
 }
 
-void CControlUI::SetType(EControlType type) {
+void CControlUI::SetType(const EControlType type) {
 	m_type = type;
 }
 
-void CControlUI::NotifyListeners(CControlUI * sender) {
+void CControlUI::NotifyListeners(CControlUI * const sender) {
 	for (std::vector<IEventListener *>::iterator itr = m_listeners.begin();
 	itr != m_listeners.end(); ++itr) {
 		(*itr)->ManageControlEvent(sender);

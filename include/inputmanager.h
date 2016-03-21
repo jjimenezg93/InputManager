@@ -1,13 +1,14 @@
 #ifndef _C_INPUT_MANAGER_H
 #define _C_INPUT_MANAGER_H
 
-#include "iregistrable.h"
-#include "event.h"
 #include "array.h"
 
-class IGesture;
+class CEvent;
 class CMouseController;
 class CKeyboardController;
+class IGesture;
+class IRegistrable;
+enum EEventController;
 
 class CInputManager {
 public:

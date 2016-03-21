@@ -5,7 +5,7 @@ class CControlUI;
 
 class IEventListener {
 public:
-	virtual void ManageControlEvent(CControlUI * sender) = 0;
+	virtual void ManageControlEvent(CControlUI * const sender) = 0;
 };
 
 #endif //!_I_EVENT_LISTENER_H
