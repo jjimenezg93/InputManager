@@ -63,6 +63,17 @@ CGUIRender & CControlUI::GetGUIRender() {
 	return m_guirender;
 }
 
-void CControlUI::SetState(EGUICurrentState newState) {
+void CControlUI::SetCurrentState(EGUICurrentState newState) {
 	m_currentState = newState;
+}
+
+void CControlUI::SetType(EControlType type) {
+	m_type = type;
+}
+
+void CControlUI::NotifyListeners(CControlUI * sender) {
+	for (std::vector<IEventListener *>::iterator itr = m_listeners.begin();
+	itr != m_listeners.end(); ++itr) {
+		(*itr)->ManageControlEvent(sender);
+	}
 }

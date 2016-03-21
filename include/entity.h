@@ -21,7 +21,7 @@ public:
 
 	virtual void Notify(const CEvent * const ev);
 
-	//virtual void OnClick(CControlUI * sender);
+	virtual void ManageControlEvent(CControlUI * sender);
 	
 	void ManageMouse(const CEvent * const ev);
 	void ManageKeyboard(const CEvent * const ev);

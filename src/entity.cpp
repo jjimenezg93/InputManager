@@ -7,6 +7,8 @@
 #include "../include/string.h"
 #include "../include/resourcemanager.h"
 
+#include <iostream>
+
 double genRandomF(double min, double max);
 
 CEntity::CEntity(const String &filename) {
@@ -30,13 +32,17 @@ void CEntity::Notify(const CEvent * const ev) {
 	}
 }
 
-//void CEntity::OnClick(CControlUI * sender) {
-//	switch (sender->GetType()) {
-//	case ECT_BUTTON:
-//		m_sprite->SetX(m_sprite->GetX() + 50);
-//		break;
-//	}
-//}
+void CEntity::ManageControlEvent(CControlUI * sender) {
+	switch (sender->GetType()) {
+	case ECT_BUTTON:
+		//debug
+		std::cout << "ENTITY received Button" << std::endl;
+		m_sprite->SetColor(255, 0, 255, 255);
+		break;
+	default:
+		break;
+	}
+}
 
 void CEntity::ManageMouse(const CEvent * const ev) {
 	if (ev->GetId() == EME_LMB_PRESS) {

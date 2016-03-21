@@ -13,30 +13,28 @@ uint8 CCheckBoxUI::Init() {
 uint8 CCheckBoxUI::Init(int32 x, int32 y) {
 	m_x = x;
 	m_y = y;
-	m_type = ECT_CHECKBOX;
-	m_currentState = EGUICS_DEFAULT;
+	SetType(ECT_CHECKBOX);
+	SetCurrentState(EGUICS_DEFAULT);
 	return 0;
 }
 
 uint8 CCheckBoxUI::Init(int32 x, int32 y, Image * default, Image * onHover, Image * inactive) {
 	Init(x, y);
-	m_guirender.SetDefaultImg(default);
-	m_guirender.SetOnClickImg(onHover);
-	m_guirender.SetInactiveImg(inactive);
+	GetGUIRender().SetDefaultImg(default);
+	GetGUIRender().SetOnClickImg(onHover);
+	GetGUIRender().SetInactiveImg(inactive);
 	return 0;
 }
 
 bool CCheckBoxUI::ManageEvent(const CEvent * const ev) {
 	bool ret = false;
-	if (m_currentState != EGUICS_INACTIVE) {
+	if (GetCurrentState() != EGUICS_INACTIVE) {
 		if (ev->GetController() == EEC_MOUSE) {
 			switch (ev->GetId()) {
 			case EME_LMB_CLICK:
 				if (MouseIsOver(ev)) {
-					if (m_currentState == EGUICS_DEFAULT)
-						m_currentState = EGUICS_ONCLICK;
-					else if (m_currentState == EGUICS_ONCLICK)
-						m_currentState = EGUICS_DEFAULT;
+					if (GetCurrentState() == EGUICS_DEFAULT)
+						SetCurrentState(EGUICS_ONCLICK);
 					std::vector<CControlUI *>::iterator itr = m_complementaries.begin();
 					while (itr != m_complementaries.end()) {
 						if ((*itr)->GetType() == ECT_CHECKBOX) {
@@ -61,7 +59,7 @@ void CCheckBoxUI::Update() {
 }
 
 void CCheckBoxUI::Render() {
-	m_guirender.Render(m_currentState, m_x, m_y);
+	GetGUIRender().Render(GetCurrentState(), m_x, m_y);
 	CControlUI::Render();
 }
 
@@ -75,8 +73,8 @@ void CCheckBoxUI::RemoveComplementary(CControlUI * compl) {
 void CCheckBoxUI::UpdateComplementariesState() {
 	std::vector<CControlUI *>::iterator itr = m_complementaries.begin();
 	while (itr != m_complementaries.end()) {
-		if ((*itr)->GetState() == EGUICS_ONCLICK) {
-			m_currentState = EGUICS_DEFAULT;
+		if ((*itr)->GetCurrentState() == EGUICS_ONCLICK) {
+			SetCurrentState(EGUICS_DEFAULT);
 		}
 
 		++itr;
@@ -84,9 +82,8 @@ void CCheckBoxUI::UpdateComplementariesState() {
 }
 
 bool CCheckBoxUI::MouseIsOver(const CEvent * const ev) {
-	Image * img = m_guirender.GetCurrentImg(m_currentState);
-	uint16 width = img->GetWidth() * img->GetHFrames();
-	uint16 height = img->GetHeight() * img->GetVFrames();
+	uint16 width = GetGUIRender().GetCurrImgWidth(GetCurrentState());
+	uint16 height = GetGUIRender().GetCurrImgHeight(GetCurrentState());
 
 	if (ev->GetX() >= m_x - (width / 2) && ev->GetX() <= m_x + (width / 2)
 		&& ev->GetY() >= m_y - (height / 2) && ev->GetY() <= m_y + (height / 2)) {

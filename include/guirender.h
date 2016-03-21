@@ -1,7 +1,7 @@
 #ifndef _C_GUI_RENDER_H
 #define _C_GUI_RENDER_H
 
-#include "../include/types.h"
+#include "types.h"
 
 class Image;
 
@@ -15,17 +15,19 @@ enum EGUICurrentState {
 class CGUIRender {
 public:
 	CGUIRender() {}
-	CGUIRender(Image * default, Image * onHover, Image * inactive); //images always with midHandle
+	CGUIRender(Image * default, Image * onClick, Image * inactive); //images always with midHandle
 
 	// all defined in .cpp in order to allow image deleting more decoupled if
 	// a method to delete 1 image is added to ResourceManager
-	virtual void SetDefaultImg(Image * img);
-	virtual void SetOnClickImg(Image * img);
-	virtual void SetInactiveImg(Image * img);
+	void SetDefaultImg(Image * const img);
+	void SetOnClickImg(Image * const img);
+	void SetInactiveImg(Image * const img);
 
-	Image * GetCurrentImg(EGUICurrentState state);
+	Image * GetCurrentImg(EGUICurrentState state) const;
+	uint16 GetCurrImgWidth(EGUICurrentState state) const;
+	uint16 GetCurrImgHeight(EGUICurrentState state) const;
 
-	virtual void Render(EGUICurrentState state, int32 x, int32 y);
+	void Render(EGUICurrentState state, int32 x, int32 y);
 private:
 	Image * m_defaultImg;
 	Image * m_onClickImg;

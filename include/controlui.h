@@ -32,15 +32,22 @@ public:
 	virtual void AddControl(CControlUI * const control);
 	virtual void RemoveControl(CControlUI * const control);
 
+	int32 GetId() const { return m_id; }
+	void SetId(int32 id) { m_id = id; }
+
 	EControlType GetType() const { return m_type; }
 
 	CGUIRender & GetGUIRender();
-	void SetState(EGUICurrentState newState);
-	EGUICurrentState GetState() const { return m_currentState; }
+	void SetCurrentState(EGUICurrentState newState);
+	EGUICurrentState GetCurrentState() const { return m_currentState; }
 protected:
+	void SetType(EControlType type);
+	void NotifyListeners(CControlUI * sender);
+private:
 	std::vector<IEventListener *> m_listeners;
 	std::vector<CControlUI *> m_controls;
 
+	int32 m_id;
 	EControlType m_type;
 	CGUIRender m_guirender;
 	EGUICurrentState m_currentState;

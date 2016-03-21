@@ -5,31 +5,31 @@
 #include "../include/image.h"
 #include "../include/renderer.h"
 
-CGUIRender::CGUIRender(Image * default, Image * onHover, Image * inactive) {
+CGUIRender::CGUIRender(Image * default, Image * onClick, Image * inactive) {
 	m_defaultImg = default;
-	m_onClickImg = onHover;
+	m_onClickImg = onClick;
 	m_inactiveImg = inactive;
 }
 
-void CGUIRender::SetDefaultImg(Image * img) {
+void CGUIRender::SetDefaultImg(Image * const img) {
 	if (img)
 		img->SetMidHandle();
 	m_defaultImg = img;
 }
 
-void CGUIRender::SetOnClickImg(Image * img) {
+void CGUIRender::SetOnClickImg(Image * const img) {
 	if (img)
 		img->SetMidHandle();
 	m_onClickImg = img;
 }
 
-void CGUIRender::SetInactiveImg(Image * img) {
+void CGUIRender::SetInactiveImg(Image * const img) {
 	if (img)
 		img->SetMidHandle();
 	m_inactiveImg = img;
 }
 
-Image * CGUIRender::GetCurrentImg(EGUICurrentState state) {
+Image * CGUIRender::GetCurrentImg(EGUICurrentState state) const {
 	switch (state) {
 	case EGUICS_DEFAULT:
 		return m_defaultImg;
@@ -44,6 +44,14 @@ Image * CGUIRender::GetCurrentImg(EGUICurrentState state) {
 		return nullptr;
 		break;
 	}
+}
+
+uint16 CGUIRender::GetCurrImgWidth(EGUICurrentState state) const {
+	return GetCurrentImg(state)->GetWidth() * GetCurrentImg(state)->GetHFrames();
+}
+
+uint16 CGUIRender::GetCurrImgHeight(EGUICurrentState state) const {
+	return GetCurrentImg(state)->GetHeight() * GetCurrentImg(state)->GetVFrames();
 }
 
 void CGUIRender::Render(EGUICurrentState state, int32 x, int32 y) {

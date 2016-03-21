@@ -11,56 +11,57 @@
 double genRandomF(double min, double max);
 
 uint8 CButtonUI::Init() {
+	m_pressed = false;
+	SetType(ECT_BUTTON);
+	SetCurrentState(EGUICS_DEFAULT);
 	return 0;
 }
 
 uint8 CButtonUI::Init(int32 x, int32 y) {
+	Init();
 	m_x = x;
 	m_y = y;
-	m_pressed = false;
-	m_type = ECT_BUTTON;
-	m_currentState = EGUICS_DEFAULT;
 	return 0;
 }
 
 uint8 CButtonUI::Init(int32 x, int32 y, Image * default, Image * onHover, Image * inactive) {
 	Init(x, y);
-	m_guirender.SetDefaultImg(default);
-	m_guirender.SetOnClickImg(onHover);
-	m_guirender.SetInactiveImg(inactive);
+	GetGUIRender().SetDefaultImg(default);
+	GetGUIRender().SetOnClickImg(onHover);
+	GetGUIRender().SetInactiveImg(inactive);
 	return 0;
+}
+
+void CButtonUI::SetPosition(int32 x, int32 y) {
+	m_x = x;
+	m_y = y;
 }
 
 bool CButtonUI::ManageEvent(const CEvent * const ev) {
 	bool ret = false;
-	if (m_currentState != EGUICS_INACTIVE) {
+	if (GetCurrentState() != EGUICS_INACTIVE) {
 		if (ev->GetController() == EEC_MOUSE) {
 			switch (ev->GetId()) {
 			case EME_LMB_PRESS:
 				if (MouseIsOver(ev)) {
 					m_pressed = true;
-					m_currentState = EGUICS_ONCLICK;
+					SetCurrentState(EGUICS_ONCLICK);
 					ret = true;
 				}
 				break;
 			case EME_LMB_RELEASE:
 				if (m_pressed && MouseIsOver(ev)) {
-					//click!
 					m_pressed = false;
 					std::cout << "CLICK!" << std::endl;
-					std::vector<IEventListener *>::iterator itr = m_listeners.begin();
-					while (itr != m_listeners.end()) {
-						(*itr)->OnClick(this);
-						++itr;
-					}
-					m_currentState = EGUICS_DEFAULT;
+					NotifyListeners(this);
+					SetCurrentState(EGUICS_DEFAULT);
 					ret = true;
 				}
 				break;
 			case EME_MOUSE_MOVED:
 				if (!MouseIsOver(ev)) {
 					m_pressed = false;
-					m_currentState = EGUICS_DEFAULT;
+					SetCurrentState(EGUICS_DEFAULT);
 					ret = true;
 				}
 				break;
@@ -77,14 +78,13 @@ void CButtonUI::Update() {
 }
 
 void CButtonUI::Render() {
-	m_guirender.Render(m_currentState, m_x, m_y);
+	GetGUIRender().Render(GetCurrentState(), m_x, m_y);
 	CControlUI::Render();
 }
 
 bool CButtonUI::MouseIsOver(const CEvent * const ev) {
-	Image * img = m_guirender.GetCurrentImg(m_currentState);
-	uint16 width = img->GetWidth() * img->GetHFrames();
-	uint16 height = img->GetHeight() * img->GetVFrames();
+	uint16 width = GetGUIRender().GetCurrImgWidth(GetCurrentState());
+	uint16 height = GetGUIRender().GetCurrImgHeight(GetCurrentState());
 
 	if (ev->GetX() >= m_x - (width / 2) && ev->GetX() <= m_x + (width / 2)
 	&& ev->GetY() >= m_y - (height / 2) && ev->GetY() <= m_y + (height / 2)) {

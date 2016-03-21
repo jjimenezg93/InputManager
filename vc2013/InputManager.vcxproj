@@ -113,7 +113,6 @@
     <ClInclude Include="..\include\map.h" />
     <ClInclude Include="..\include\mapscene.h" />
     <ClInclude Include="..\include\math.h" />
-    <ClInclude Include="..\include\messagesui.h" />
     <ClInclude Include="..\include\mousecontroller.h" />
     <ClInclude Include="..\include\nsinputmanagercontroller.h" />
     <ClInclude Include="..\include\nsinputmanagerentity.h" />
@@ -128,6 +127,8 @@
     <ClInclude Include="..\include\screen.h" />
     <ClInclude Include="..\include\skeletondata.h" />
     <ClInclude Include="..\include\skeletonsprite.h" />
+    <ClInclude Include="..\include\sliderrender.h" />
+    <ClInclude Include="..\include\sliderui.h" />
     <ClInclude Include="..\include\sprite.h" />
     <ClInclude Include="..\include\string.h" />
     <ClInclude Include="..\include\types.h" />
@@ -169,6 +170,8 @@
     <ClCompile Include="..\src\screen.cpp" />
     <ClCompile Include="..\src\skeletondata.cpp" />
     <ClCompile Include="..\src\skeletonsprite.cpp" />
+    <ClCompile Include="..\src\sliderrender.cpp" />
+    <ClCompile Include="..\src\sliderui.cpp" />
     <ClCompile Include="..\src\sprite.cpp" />
     <ClCompile Include="..\src\controlui.cpp" />
   </ItemGroup>
