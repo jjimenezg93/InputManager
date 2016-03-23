@@ -2,6 +2,15 @@
 #include "../include/event.h"
 #include "../include/ieventlistener.h"
 
+CControlUI::~CControlUI() {
+	for (std::vector<CControlUI *>::iterator itr = m_controls.begin();
+	itr != m_controls.end(); ++itr) {
+		delete (*itr);
+	}
+	m_controls.clear();
+	m_listeners.clear(); //mustn't delete listeners
+}
+
 void CControlUI::Update() {
 	for (std::vector<CControlUI *>::iterator itr = m_controls.begin();
 	itr != m_controls.end(); ++itr) {
@@ -24,7 +33,9 @@ bool CControlUI::ManageEvent(const CEvent * const ev) {
 	while (itr != m_controls.rend()) {
 		if ((*itr++)->ManageEvent(ev)) {
 			consumed = true;
-			break;
+			if (ev->GetId() != EME_MOUSE_MOVED && ev->GetController() == EEC_MOUSE)
+				//without this conditions, only 1 button displays properly after moving mouse out
+				break;
 		}
 	}
 

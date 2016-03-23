@@ -7,6 +7,7 @@
 
 class SMessage;
 class CGUIRender;
+class String;
 
 class CButtonUI: public CControlUI {
 public:
@@ -19,6 +20,7 @@ public:
 		Image * const onClickImg, Image * const inactiveImg = nullptr);
 
 	void SetPosition(const int32 x, const int32 y);
+	void SetText(String &newText);
 
 	virtual bool ManageEvent(const CEvent * const ev);
 

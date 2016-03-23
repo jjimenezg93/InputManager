@@ -16,6 +16,7 @@ uint8 CButtonUI::Init() {
 	m_pressed = false;
 	SetType(ECT_BUTTON);
 	SetCurrentState(EGUICS_DEFAULT);
+	ret = GetGUIRender().Init();
 	return ret;
 }
 
@@ -28,17 +29,20 @@ uint8 CButtonUI::Init(const int32 x, const int32 y) {
 }
 
 uint8 CButtonUI::Init(const int32 x, const int32 y, Image * const defaultImg,
-		Image * const onHoverImg, Image * const inactiveImg) {
-	Init(x, y);
-	GetGUIRender().SetDefaultImg(defaultImg);
-	GetGUIRender().SetOnClickImg(onHoverImg);
-	GetGUIRender().SetInactiveImg(inactiveImg);
-	return 0;
+		Image * const onClickImg, Image * const inactiveImg) {
+	uint8 ret = 0;
+	ret = Init(x, y);
+	ret = GetGUIRender().Init(defaultImg, onClickImg, inactiveImg);
+	return ret;
 }
 
 void CButtonUI::SetPosition(const int32 x, const int32 y) {
 	m_x = x;
 	m_y = y;
+}
+
+void CButtonUI::SetText(String &newText) {
+	GetGUIRender().SetText(newText);
 }
 
 bool CButtonUI::ManageEvent(const CEvent * const ev) {

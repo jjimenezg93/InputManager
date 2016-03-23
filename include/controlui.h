@@ -22,7 +22,7 @@ enum EGUICurrentState;
 
 class CControlUI {
 public:
-	virtual ~CControlUI() {}
+	virtual ~CControlUI();
 
 	virtual uint8 Init() = 0;
 

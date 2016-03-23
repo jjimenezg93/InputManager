@@ -8,6 +8,7 @@
 
 uint8 CCheckBoxUI::Init() {
 	uint8 ret = 0;
+	ret = GetGUIRender().Init();
 	return ret;
 }
 
@@ -21,12 +22,11 @@ uint8 CCheckBoxUI::Init(int32 x, int32 y) {
 	return ret;
 }
 
-uint8 CCheckBoxUI::Init(int32 x, int32 y, Image * default, Image * onHover, Image * inactive) {
+uint8 CCheckBoxUI::Init(int32 x, int32 y, Image * defaultImg,
+		Image * onClickImg, Image * inactiveImg) {
 	uint8 ret = 0;
 	ret = Init(x, y);
-	GetGUIRender().SetDefaultImg(default);
-	GetGUIRender().SetOnClickImg(onHover);
-	GetGUIRender().SetInactiveImg(inactive);
+	ret = GetGUIRender().Init(defaultImg, onClickImg, inactiveImg);
 	return ret;
 }
 

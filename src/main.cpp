@@ -65,16 +65,21 @@ int main() {
 
 	controlManager.Init();
 
+	String str;
 	//Controls
 	CButtonUI button;
+	button.Init(100, 50, buttonImgDefault, buttonImgOnClick, buttonImgInactive);
 	button.SetId(0);
-	button.Init(50, 50, buttonImgDefault, buttonImgOnClick, buttonImgInactive);
+	str = "Inactive";
+	button.SetText(str);
 	controlManager.AddControl(&button);
 	button.SetCurrentState(EGUICS_INACTIVE);
 
 	CButtonUI button2;
-	button.SetId(1);
 	button2.Init(300, 250, buttonImgDefault, buttonImgOnClick, buttonImgInactive);
+	button2.SetId(1);
+	str = "Click!";
+	button2.SetText(str);
 	controlManager.AddControl(&button2);
 
 	CSliderUI slider;
