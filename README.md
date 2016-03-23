@@ -9,4 +9,4 @@ The main goal of this project is to get used to User Interfaces, mainly in terms
 ___
 
 ###Version
-Project is currently at **v1.3.1**
+Project is currently at **v1.4.0**

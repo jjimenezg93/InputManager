@@ -17,9 +17,6 @@ enum EGUICurrentState {
 class CGUIRender {
 public:
 	CGUIRender();
-	//images are supposed to have mid handle
-	//CGUIRender(Image * const defaultImg, Image * const onClickImg, Image * const inactiveImg);
-
 	~CGUIRender();
 
 	uint8 Init();

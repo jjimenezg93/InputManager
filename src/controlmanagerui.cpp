@@ -28,14 +28,17 @@ void CControlManagerUI::AddControl(CControlUI * const control) {
 	m_controls.push_back(control);
 }
 
-void CControlManagerUI::RemoveControl(CControlUI * const control) {
+bool CControlManagerUI::RemoveControl(CControlUI * const control) {
+	bool ret = false;
 	std::vector<CControlUI *>::iterator itr = m_controls.begin();
 	while (itr != m_controls.end()) {
 		if ((*itr) == control) {
 			itr = m_controls.erase(itr);
+			ret = true;
 			break;
 		}
 	}
+	return ret;
 }
 
 void CControlManagerUI::Update() {

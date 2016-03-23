@@ -3,6 +3,7 @@
 #include "../include/buttonui.h"
 #include "../include/clickgesture.h"
 #include "../include/checkboxui.h"
+#include "../include/checkboxgroup.h"
 #include "../include/controlmanagerui.h"
 #include "../include/inputmanager.h"
 #include "../include/mousecontroller.h"
@@ -40,21 +41,28 @@ int main() {
 
 	//slider Imgs
 	Image * sliderBallImg = ResourceManager::Instance().LoadImage("data/slider_ball.png");	
-	sliderBallImg->SetHandle(0, 0.5f);
+	sliderBallImg->SetHandle(0,
+		static_cast<float>(sliderBallImg->GetHeight() * sliderBallImg->GetVFrames()));
+	
 	Image * sliderBarImg = ResourceManager::Instance().LoadImage("data/slider_bar.png");
-	sliderBarImg->SetHandle(0, 0.5f);
+	sliderBarImg->SetHandle(0,
+		static_cast<float>(sliderBarImg->GetHeight() * sliderBarImg->GetVFrames()));
+	
 	Image * sliderLeftDefaultImg = ResourceManager::Instance().LoadImage(
 		"data/slider_left_default.png");
-	sliderLeftDefaultImg->SetHandle(0, 0.5f);
+	sliderLeftDefaultImg->SetMidHandle();
+	
 	Image * sliderRightDefaultImg = ResourceManager::Instance().LoadImage(
 		"data/slider_right_default.png");
-	sliderRightDefaultImg->SetHandle(0, 0.5f);
+	sliderRightDefaultImg->SetMidHandle();
+	
 	Image * sliderLeftOnClickImg = ResourceManager::Instance().LoadImage(
 		"data/slider_left_onclick.png");
-	sliderLeftOnClickImg->SetHandle(0, 0.5f);
+	sliderLeftOnClickImg->SetMidHandle();
+	
 	Image * sliderRightOnClickImg = ResourceManager::Instance().LoadImage(
 		"data/slider_right_onclick.png");
-	sliderRightOnClickImg->SetHandle(0, 0.5f);
+	sliderRightOnClickImg->SetMidHandle();
 
 	//Input & Control managers
 	CInputManager * inputManager = &CInputManager::Instance();
@@ -78,7 +86,7 @@ int main() {
 	CButtonUI button2;
 	button2.Init(300, 250, buttonImgDefault, buttonImgOnClick, buttonImgInactive);
 	button2.SetId(1);
-	str = "Click!";
+	str = "Click";
 	button2.SetText(str);
 	controlManager.AddControl(&button2);
 
@@ -90,22 +98,23 @@ int main() {
 
 	CCheckBoxUI checkbox;
 	checkbox.Init(250, 100, checkboxImgDefault, checkboxImgOnClick);
-	controlManager.AddControl(&checkbox);
+	checkbox.SetId(0);
 
 	CCheckBoxUI checkbox2;
 	checkbox2.Init(300, 100, checkboxImgDefault, checkboxImgOnClick);
-	controlManager.AddControl(&checkbox2);
+	checkbox2.SetId(1);
 
 	CCheckBoxUI checkbox3;
 	checkbox3.Init(350, 100, checkboxImgDefault, checkboxImgOnClick);
-	controlManager.AddControl(&checkbox3);
+	checkbox3.SetId(2);
 
-	checkbox.AddComplementary(&checkbox2);
-	checkbox.AddComplementary(&checkbox3);
-	checkbox2.AddComplementary(&checkbox);
-	checkbox2.AddComplementary(&checkbox3);
-	checkbox3.AddComplementary(&checkbox);
-	checkbox3.AddComplementary(&checkbox2);
+	CCheckBoxGroup cbGroup;
+	cbGroup.Init();
+	cbGroup.AddControl(&checkbox);
+	cbGroup.AddControl(&checkbox2);
+	cbGroup.AddControl(&checkbox3);
+	controlManager.AddControl(&cbGroup);
+
 	checkbox.SetCurrentState(EGUICS_ONCLICK);
 
 	button2.AddEventListener(&entity);
