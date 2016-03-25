@@ -2,7 +2,7 @@
 #define _C_CONTROL_MANAGER_UI_H
 
 #include "iregistrable.h"
-#include "../include/types.h"
+#include "types.h"
 
 #include <vector>
 
@@ -14,7 +14,7 @@ public:
 	uint8 Init(); // needs CInputManager
 	virtual void Notify(const CEvent * const);
 	void AddControl(CControlUI * const);
-	void RemoveControl(CControlUI * const);
+	bool RemoveControl(CControlUI * const);
 
 	void Update();
 	void Render();

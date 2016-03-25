@@ -16,10 +16,11 @@ public:
     virtual uint16 GetVFrames() const { return m_vframes; }
     virtual uint16 GetWidth() const { return m_width / m_hframes; }
     virtual uint16 GetHeight() const { return m_height / m_vframes; }
-    virtual void SetHandle(int32 handlex, int32 handley) { m_handlex = handlex; m_handley = handley; }
-    virtual void SetMidHandle() { SetHandle(GetWidth()/2, GetHeight()/2); }
-    virtual int32 GetHandleX() const { return m_handlex; }
-    virtual int32 GetHandleY() const { return m_handley; }
+    virtual void SetHandle(float handlex, float handley) { m_handlex = handlex; m_handley = handley; }
+    virtual void SetMidHandle() { SetHandle(static_cast<float>(GetWidth()/2),
+		static_cast<float>(GetHeight()/2)); }
+    virtual float GetHandleX() const { return m_handlex; }
+    virtual float GetHandleY() const { return m_handley; }
     virtual void Bind() const;
     virtual double GetLastU() const { return m_lastU; }
     virtual double GetLastV() const { return m_lastV; }
@@ -29,7 +30,7 @@ private:
     String m_filename;
     uint16 m_hframes, m_vframes;
     uint16 m_width, m_height;
-    int32 m_handlex, m_handley;
+	float m_handlex, m_handley;
     uint32 m_gltex;
     double m_lastU, m_lastV;		//image width/buffer width, image height/buffer height
 };

@@ -1,10 +1,14 @@
-#include "../include/keyboardcontroller.h"
 #include "../include/event.h"
+#include "../include/keyboardcontroller.h"
 #include "../include/nsinputmanagercontroller.h"
 
 #include "../lib/glfw.h"
 
 CKeyboardController::CKeyboardController() {}
+
+CKeyboardController::~CKeyboardController() {
+	glfwTerminate();
+}
 
 uint8 CKeyboardController::Init() {
 	uint8 ret = 0;
@@ -12,10 +16,6 @@ uint8 CKeyboardController::Init() {
 		ret = 1;
 	}
 	return ret;
-}
-
-CKeyboardController::~CKeyboardController() {
-	glfwTerminate();
 }
 
 void CKeyboardController::Update() {

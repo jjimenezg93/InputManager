@@ -1,27 +1,29 @@
 #ifndef _C_ENTITY_H
 #define _C_ENTITY_H
 
-#include "types.h"
-
-#include "event.h"
 #include "ieventlistener.h"
 #include "iregistrable.h"
+#include "types.h"
 
+class CControlUI;
+class CEvent;
+class Image;
 class Sprite;
 class String;
-class Image;
-class CControlUI;
+
+enum EEventController;
 
 class CEntity: public IRegistrable, public IEventListener {
 public:
 	CEntity(const String &filename);
 	CEntity(Image * const img);
+	~CEntity();
 
 	Sprite * GetSprite() const { return m_sprite; }
 
 	virtual void Notify(const CEvent * const ev);
 
-	//virtual void OnClick(CControlUI * sender);
+	virtual void ManageControlEvent(CControlUI * const sender);
 	
 	void ManageMouse(const CEvent * const ev);
 	void ManageKeyboard(const CEvent * const ev);

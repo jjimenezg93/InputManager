@@ -1,6 +1,6 @@
+#include "../include/array.h"
 #include "../include/clickgesture.h"
 #include "../include/event.h"
-#include "../include/array.h"
 
 #include <stdio.h>
 
@@ -20,7 +20,8 @@ void CClickGesture::ModifyArray(Array<CEvent *> &ev, const uint32 numEvents) {
 				m_releaseTime = clock();
 				m_pressed = false;
 
-				float duration = (static_cast<float>(m_releaseTime - m_pressTime)) / CLOCKS_PER_SEC;
+				float duration = (static_cast<float>(m_releaseTime - m_pressTime))
+					/ CLOCKS_PER_SEC;
 
 				if (duration < CLICK_THRESHOLD_TIME) {
 					ev[i]->SetId(EME_LMB_CLICK);

@@ -6,16 +6,21 @@
 #include "types.h"
 
 class SMessage;
-class IEventListener;
 class CGUIRender;
+class String;
 
 class CButtonUI: public CControlUI {
 public:
 	CButtonUI() {}
+	virtual ~CButtonUI();
 
 	virtual uint8 Init();
-	uint8 Init(int32 x, int32 y);
-	uint8 Init(int32 x, int32 y, Image * default, Image * onHover, Image * inactive = nullptr);
+	uint8 Init(const int32 x, const int32 y);
+	uint8 Init(const int32 x, const int32 y, Image * const defaultImg,
+		Image * const onClickImg, Image * const inactiveImg = nullptr);
+
+	void SetPosition(const int32 x, const int32 y);
+	void SetText(String &newText);
 
 	virtual bool ManageEvent(const CEvent * const ev);
 

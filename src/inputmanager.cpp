@@ -1,5 +1,6 @@
 #include "../include/clickgesture.h"
 #include "../include/controlmanagerui.h"
+#include "../include/event.h"
 #include "../include/inputmanager.h"
 #include "../include/iregistrable.h"
 #include "../include/keyboardcontroller.h"

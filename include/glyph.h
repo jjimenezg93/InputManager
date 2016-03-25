@@ -16,7 +16,7 @@ public:
 	virtual void SetEndX(float x) { m_endX = x; }
 	virtual void SetEndY(float y) { m_endY = y; }
 private:
-	double m_origX, m_origY, m_endX, m_endY;
+	float m_origX, m_origY, m_endX, m_endY;
 };
 
 #endif

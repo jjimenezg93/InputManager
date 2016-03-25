@@ -6,8 +6,8 @@
 class CMouseController {
 public:
 	CMouseController();
-	uint8 Init();
 	~CMouseController();
+	uint8 Init();
 	
 	void Update();
 private:

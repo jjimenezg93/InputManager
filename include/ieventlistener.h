@@ -5,13 +5,7 @@ class CControlUI;
 
 class IEventListener {
 public:
-	//virtual void ManageEvent(const CEvent * const event) = 0;
-//protected:
-	virtual void OnClick(CControlUI * sender) {}
-	virtual void OnHover(CControlUI * sender) {}
-	virtual void OnLostHover(CControlUI * sender) {}
-	virtual void OnKeyDown(CControlUI * sender) {}
-	virtual void OnKeyUp(CControlUI * sender) {}
+	virtual void ManageControlEvent(CControlUI * const sender) = 0;
 };
 
-#endif _I_EVENT_LISTENER_H
+#endif //!_I_EVENT_LISTENER_H
