@@ -9,6 +9,7 @@
 #include "../include/mousecontroller.h"
 #include "../include/keyboardcontroller.h"
 #include "../include/sliderui.h"
+#include "../include/windowui.h"
 
 #include "../include/u-gine.h"
 
@@ -21,7 +22,11 @@ int main() {
 	Image * alienImg = ResourceManager::Instance().LoadImage("data/alien.png");
 	alienImg->SetMidHandle();
 	CEntity entity(alienImg);
-	entity.GetSprite()->SetPosition(400, 300);
+	entity.GetSprite()->SetPosition(350, 340);
+
+	//Windows
+	Image * backgroundImg = ResourceManager::Instance().LoadImage("data/background.jpg");
+	Image * windowImg = ResourceManager::Instance().LoadImage("data/window4.png");
 
 	//button Imgs
 	Image * buttonImgDefault = ResourceManager::Instance().LoadImage("data/button_default.png");
@@ -75,8 +80,18 @@ int main() {
 
 	String str;
 	//Controls
+	CWindowUI background;
+	background.Init(0, 0, backgroundImg);
+	background.SetId(0);
+	controlManager.AddControl(&background);
+
+	CWindowUI windowSlider;
+	windowSlider.Init(100, 0, windowImg);
+	windowSlider.SetId(1);
+	controlManager.AddControl(&windowSlider);
+
 	CButtonUI button;
-	button.Init(100, 50, buttonImgDefault, buttonImgOnClick, buttonImgInactive);
+	button.Init(350, 80, buttonImgDefault, buttonImgOnClick, buttonImgInactive);
 	button.SetId(0);
 	str = "Inactive";
 	button.SetText(str);
@@ -84,28 +99,28 @@ int main() {
 	button.SetCurrentState(EGUICS_INACTIVE);
 
 	CButtonUI button2;
-	button2.Init(300, 250, buttonImgDefault, buttonImgOnClick, buttonImgInactive);
+	button2.Init(350, 140, buttonImgDefault, buttonImgOnClick, buttonImgInactive);
 	button2.SetId(1);
 	str = "Click";
 	button2.SetText(str);
 	controlManager.AddControl(&button2);
 
 	CSliderUI slider;
-	slider.Init(400, 400, 0, 10, sliderBarImg, sliderBallImg, sliderLeftDefaultImg,
+	slider.Init(200, 400, 0, 10, sliderBarImg, sliderBallImg, sliderLeftDefaultImg,
 		sliderLeftOnClickImg, sliderRightDefaultImg, sliderRightOnClickImg);
 	slider.SetId(0);
 	controlManager.AddControl(&slider);
 
 	CCheckBoxUI checkbox;
-	checkbox.Init(250, 100, checkboxImgDefault, checkboxImgOnClick);
+	checkbox.Init(300, 220, checkboxImgDefault, checkboxImgOnClick);
 	checkbox.SetId(0);
 
 	CCheckBoxUI checkbox2;
-	checkbox2.Init(300, 100, checkboxImgDefault, checkboxImgOnClick);
+	checkbox2.Init(340, 220, checkboxImgDefault, checkboxImgOnClick);
 	checkbox2.SetId(1);
 
 	CCheckBoxUI checkbox3;
-	checkbox3.Init(350, 100, checkboxImgDefault, checkboxImgOnClick);
+	checkbox3.Init(380, 220, checkboxImgDefault, checkboxImgOnClick);
 	checkbox3.SetId(2);
 
 	CCheckBoxGroup cbGroup;

@@ -135,6 +135,7 @@
     <ClInclude Include="..\include\types.h" />
     <ClInclude Include="..\include\u-gine.h" />
     <ClInclude Include="..\include\controlui.h" />
+    <ClInclude Include="..\include\windowui.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\lib\stb_image.c" />
@@ -176,6 +177,7 @@
     <ClCompile Include="..\src\sliderui.cpp" />
     <ClCompile Include="..\src\sprite.cpp" />
     <ClCompile Include="..\src\controlui.cpp" />
+    <ClCompile Include="..\src\windowui.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
