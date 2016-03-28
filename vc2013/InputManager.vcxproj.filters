@@ -189,6 +189,9 @@
     <ClInclude Include="..\include\windowui.h">
       <Filter>Header Files\GUI</Filter>
     </ClInclude>
+    <ClInclude Include="..\include\draggesture.h">
+      <Filter>Header Files\InputManager</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\src\affector.cpp">
@@ -310,6 +313,9 @@
     </ClCompile>
     <ClCompile Include="..\src\windowui.cpp">
       <Filter>Source Files\GUI</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\draggesture.cpp">
+      <Filter>Source Files\InputManager</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

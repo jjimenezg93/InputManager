@@ -5,6 +5,7 @@
 #include "../include/checkboxui.h"
 #include "../include/checkboxgroup.h"
 #include "../include/controlmanagerui.h"
+#include "../include/event.h"
 #include "../include/inputmanager.h"
 #include "../include/mousecontroller.h"
 #include "../include/keyboardcontroller.h"
@@ -23,6 +24,9 @@ int main() {
 	alienImg->SetMidHandle();
 	CEntity entity(alienImg);
 	entity.GetSprite()->SetPosition(350, 340);
+
+	CEntity entity2(alienImg);
+	entity2.GetSprite()->SetPosition(700, 300);
 
 	//Windows
 	Image * backgroundImg = ResourceManager::Instance().LoadImage("data/background.jpg");
@@ -129,6 +133,7 @@ int main() {
 	cbGroup.AddControl(&checkbox2);
 	cbGroup.AddControl(&checkbox3);
 	controlManager.AddControl(&cbGroup);
+	cbGroup.AddEventListener(&entity);
 
 	checkbox.SetCurrentState(EGUICS_ONCLICK);
 
@@ -141,6 +146,7 @@ int main() {
 	entity.Register(EEC_MOUSE, EME_LMB_CLICK);
 	entity.Register(EEC_MOUSE, EME_RMB_PRESS);
 	entity.Register(EEC_KEYBOARD, EKE_SPACE);*/
+	entity2.Register(EEC_MOUSE, EME_LMB_DRAG);
 
 	Renderer::Instance().SetBlendMode(Renderer::BlendMode::ALPHA);
 
@@ -154,6 +160,9 @@ int main() {
 
 		entity.GetSprite()->Update(Screen::Instance().ElapsedTime());
 		entity.GetSprite()->Render();
+
+		entity2.GetSprite()->Update(Screen::Instance().ElapsedTime());
+		entity2.GetSprite()->Render();
 
 		Screen::Instance().Refresh();
 	}

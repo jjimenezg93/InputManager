@@ -36,7 +36,7 @@ uint8 CSliderUI::Init(const int32 x, const int32 y, const int32 minVal, const in
 	m_ballValue = 0;
 	
 	//ball rate = ImgSize / (max - min)
-	m_ballRate = static_cast<float>((bar->GetWidth()) * bar->GetHFrames()
+	m_ballRate = static_cast<float>((bar->GetWidth() * bar->GetHFrames())
 		% (m_maxValue - m_minValue));
 	m_ballRate = 1.f; // ballRate is calculated wrong, provisional
 
@@ -98,6 +98,19 @@ float CSliderUI::GetValue() const {
 
 bool CSliderUI::ManageEvent(const CEvent * const ev) {
 	bool ret = false;
-	ret = m_sliderRender.MangeEventButtons(ev);
+	ret = m_sliderRender.ManageEventButtons(ev);
+	if (!ret) {
+		if (ev->GetController() == EEC_MOUSE) {
+			switch (ev->GetId()) {
+			case EME_LMB_DRAG:
+				//change ball to make it an independently dragable object
+				//m_ballValue = (m_maxValue - m_minValue) + ev->GetX() - m_x;
+				break;
+			default:
+				break;
+			}
+		}
+	}
+
 	return ret;
 }

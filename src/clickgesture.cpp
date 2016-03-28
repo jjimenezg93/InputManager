@@ -29,5 +29,4 @@ void CClickGesture::ModifyArray(Array<CEvent *> &ev, const uint32 numEvents) {
 			}
 		}
 	}
-
 }

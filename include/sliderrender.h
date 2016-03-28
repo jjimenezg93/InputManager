@@ -36,7 +36,7 @@ public:
 	CButtonUI & GetLButton() const { return *m_leftButton; }
 	CButtonUI & GetRButton() const { return *m_rightButton; }
 	
-	bool MangeEventButtons(const CEvent * const ev);
+	bool ManageEventButtons(const CEvent * const ev);
 private:
 	Image * m_barImg;
 	Image * m_ballImg;

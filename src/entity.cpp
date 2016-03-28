@@ -1,5 +1,7 @@
 #include "../include/buttonui.h"
 #include "../include/controlui.h"
+#include "../include/checkboxgroup.h"
+#include "../include/checkboxui.h"
 #include "../include/entity.h"
 #include "../include/event.h"
 #include "../include/image.h"
@@ -50,6 +52,19 @@ void CEntity::ManageControlEvent(CControlUI * const sender) {
 			static_cast<uint8>(25 * static_cast<CSliderUI *>(sender)->GetValue()));
 		//alpha = [0,255] -> 25 * [0,10]
 		break;
+	case ECT_CHECKBOX_GROUP:
+	{
+		std::cout << "ENTITY received CheckBox Group" << std::endl;
+		CCheckBoxGroup * cb = reinterpret_cast<CCheckBoxGroup *>(sender);
+		if (cb->GetActive()->GetId() == 0) {
+			m_sprite->SetScale(1.f, 1.f);
+		} else if (cb->GetActive()->GetId() == 1) {
+			m_sprite->SetScale(1.5f, 1.5f);
+		} else if (cb->GetActive()->GetId() == 2) {
+			m_sprite->SetScale(2.f, 2.f);
+		}
+		break;
+	}
 	default:
 		break;
 	}
@@ -70,6 +85,9 @@ void CEntity::ManageMouse(const CEvent * const ev) {
 			static_cast<uint8>(genRandomF(0, 255)),
 			255);
 	}
+	if (ev->GetId() == EME_LMB_DRAG && MouseIsOver(ev)) {
+		m_sprite->SetPosition(ev->GetX(), ev->GetY());
+	}
 }
 
 void CEntity::ManageKeyboard(const CEvent * const ev) {
@@ -83,4 +101,16 @@ void CEntity::ManageKeyboard(const CEvent * const ev) {
 
 void CEntity::Register(const EEventController controller, const uint32 id) {
 	IInputManagerEntity::Register(this, controller, id);
+}
+
+bool CEntity::MouseIsOver(const CEvent * const ev) {
+	uint16 width = m_sprite->GetImage()->GetWidth() * m_sprite->GetImage()->GetHFrames();
+	uint16 height = m_sprite->GetImage()->GetHeight() * m_sprite->GetImage()->GetVFrames();
+
+	if (ev->GetX() >= m_sprite->GetX() - (width / 2) && ev->GetX() <= m_sprite->GetX() + (width / 2)
+		&& ev->GetY() >= m_sprite->GetY() - (height / 2) && ev->GetY() <= m_sprite->GetY() + (height / 2)) {
+		return true;
+	} else {
+		return false;
+	}
 }

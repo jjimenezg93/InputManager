@@ -29,6 +29,7 @@ public:
 	void ManageKeyboard(const CEvent * const ev);
 
 	void Register(const EEventController controller, const uint32 id);
+	bool MouseIsOver(const CEvent * const ev);
 private:
 	Sprite * m_sprite;
 	bool m_mustMove;

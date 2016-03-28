@@ -103,7 +103,7 @@ int32 CSliderRender::GetImageHeight(const ESliderImg eImg) {
 	return img->GetHeight() * img->GetVFrames();
 }
 
-bool CSliderRender::MangeEventButtons(const CEvent * const ev) {
+bool CSliderRender::ManageEventButtons(const CEvent * const ev) {
 	bool ret = false;
 
 	ret = m_leftButton->ManageEvent(ev);
