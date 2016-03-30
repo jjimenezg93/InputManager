@@ -30,15 +30,14 @@ uint8 CSliderUI::Init(const int32 x, const int32 y, const int32 minVal, const in
 
 	assert(minVal != maxVal);
 
-	m_minValue = minVal;
-	m_maxValue = maxVal;
+	m_minValue = 0;
+	m_maxValue = bar->GetWidth() * bar->GetHFrames();
 
 	m_ballValue = 0;
 	
 	//ball rate = ImgSize / (max - min)
-	m_ballRate = static_cast<float>((bar->GetWidth() * bar->GetHFrames())
-		% (m_maxValue - m_minValue));
-	m_ballRate = 1.f; // ballRate is calculated wrong, provisional
+	m_ballRate = (static_cast<float>(bar->GetWidth() * bar->GetHFrames())
+		/ (maxVal - minVal));
 
 	return ret;
 }
@@ -60,10 +59,7 @@ void CSliderUI::Render() {
 		m_y - static_cast<int32>(m_sliderRender.GetImage(ESI_BAR)->GetHandleY()));
 	
 	//ball
-	int32 ballPos = static_cast<int32>((m_sliderRender.GetImageWidth(ESI_BAR)
-		/ (m_maxValue - m_minValue)) * m_ballValue);
-
-	m_sliderRender.Render(ESI_BALL, m_x + offset + ballPos,	m_y);
+	m_sliderRender.Render(ESI_BALL, m_x + offset + static_cast<int32>(m_ballValue), m_y);
 
 	offset += m_sliderRender.GetImageWidth(ESI_BAR)
 		+ (m_sliderRender.GetImageWidth(ESI_RIGHT_BUTTON) / 2) + SLIDER_BUTTON_MARGIN;
@@ -103,8 +99,7 @@ bool CSliderUI::ManageEvent(const CEvent * const ev) {
 		if (ev->GetController() == EEC_MOUSE) {
 			switch (ev->GetId()) {
 			case EME_LMB_DRAG:
-				//change ball to make it an independently dragable object
-				//m_ballValue = (m_maxValue - m_minValue) + ev->GetX() - m_x;
+				//if ball was an independently dragable object
 				break;
 			default:
 				break;

@@ -50,7 +50,8 @@ int main() {
 
 	//slider Imgs
 	Image * sliderBallImg = ResourceManager::Instance().LoadImage("data/slider_ball.png");	
-	sliderBallImg->SetHandle(0,
+	sliderBallImg->SetHandle(
+		static_cast<float>(sliderBallImg->GetWidth() * sliderBallImg->GetHFrames() / 2),
 		static_cast<float>(sliderBallImg->GetHeight() * sliderBallImg->GetVFrames()));
 	
 	Image * sliderBarImg = ResourceManager::Instance().LoadImage("data/slider_bar.png");

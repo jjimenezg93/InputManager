@@ -41,6 +41,7 @@ void CEntity::Notify(const CEvent * const ev) {
 }
 
 void CEntity::ManageControlEvent(CControlUI * const sender) {
+	uint8 alpha;
 	switch (sender->GetType()) {
 	case ECT_BUTTON:
 		std::cout << "ENTITY received Button" << std::endl;
@@ -48,9 +49,12 @@ void CEntity::ManageControlEvent(CControlUI * const sender) {
 		break;
 	case ECT_SLIDER:
 		std::cout << "ENTITY received Slider" << std::endl;
+		if (static_cast<CSliderUI *>(sender)->GetValue() >= 255)
+			alpha = 255;
+		else
+			alpha = static_cast<uint8>(static_cast<CSliderUI *>(sender)->GetValue());
 		m_sprite->SetColor(m_sprite->GetRed(), m_sprite->GetGreen(), m_sprite->GetBlue(),
-			static_cast<uint8>(25 * static_cast<CSliderUI *>(sender)->GetValue()));
-		//alpha = [0,255] -> 25 * [0,10]
+			alpha);
 		break;
 	case ECT_CHECKBOX_GROUP:
 	{
