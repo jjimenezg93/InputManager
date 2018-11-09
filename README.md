@@ -4,9 +4,9 @@ Input Manager (C++) developed as an extension for [U-gine](https://github.com/jj
 Extended with GUI Manager (buttons, checkboxes and sliders)
 ___
 
-###Project description
+### Project description
 The main goal of this project is to get used to User Interfaces, mainly in terms of input. Besides that, GUI management is being added to final InputManager version.
 ___
 
-###Version
+### Version
 Project is currently at **v1.5.0**
